@@ -4,11 +4,13 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ExperienceBarComponent } from './components/experience-bar/experience-bar.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ExperienceBarComponent
+    ExperienceBarComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
