@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { ExperienceBarComponent } from './components/experience-bar/experience-bar.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { CompletedChallengesComponent } from './components/completed-challenges/completed-challenges.component';
+import { CountdownComponent } from './components/countdown/countdown.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ExperienceBarComponent,
     ProfileComponent,
-    CompletedChallengesComponent
+    CompletedChallengesComponent,
+    CountdownComponent
   ],
   imports: [
     BrowserModule,
