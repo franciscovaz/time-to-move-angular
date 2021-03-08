@@ -5,12 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ExperienceBarComponent } from './components/experience-bar/experience-bar.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { CompletedChallengesComponent } from './components/completed-challenges/completed-challenges.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ExperienceBarComponent,
-    ProfileComponent
+    ProfileComponent,
+    CompletedChallengesComponent
   ],
   imports: [
     BrowserModule,
