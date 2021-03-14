@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Profile } from 'src/app/store/profile/profile.module';
 import * as fromAppRoot from '../../store/app.reducer';
 import * as ProfileActions from '../../store/profile/profile.actions';
 
-interface Profile {
-  name: string;
-  imgUrl: string;
-}
 
 @Component({
   selector: 'app-profile',
@@ -15,7 +12,7 @@ interface Profile {
 })
 export class ProfileComponent implements OnInit {
 
-  isProfileChangeModalOpen = true;
+  isProfileChangeModalOpen = false;
   profileInfo: Profile;
 
   constructor(
@@ -26,7 +23,8 @@ export class ProfileComponent implements OnInit {
 
     this.profileInfo = {
       name: 'John Doe',
-      imgUrl: 'https://github.com/franciscovaz.png'
+      imgUrl: 'https://github.com/franciscovaz.png',
+      isProfileChangeModalOpen: false
     }
 
 
@@ -35,15 +33,25 @@ export class ProfileComponent implements OnInit {
         console.log(state.profile.name);
         this.profileInfo = {
           name: state.profile.name,
-          imgUrl: state.profile.imgUrl
+          imgUrl: state.profile.imgUrl,
+          isProfileChangeModalOpen: state.profile.isProfileChangeModalOpen
+        }
+      }
+      if (state.profile.isProfileChangeModalOpen) {
+        this.profileInfo = {
+          name: state.profile.name,
+          imgUrl: state.profile.imgUrl,
+          isProfileChangeModalOpen: state.profile.isProfileChangeModalOpen
         }
       }
 
     })
+
   }
 
   handleChangeUser() {
     console.log('Change user');
+    this.store.dispatch(ProfileActions.openProfileModal({ isModalOpen: true }));
     // open modal to change name and image of user
   }
 
