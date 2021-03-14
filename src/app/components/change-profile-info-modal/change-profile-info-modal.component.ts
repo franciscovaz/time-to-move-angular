@@ -23,7 +23,7 @@ export class ChangeProfileInfoModalComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.store.dispatch(ProfileActions.getProfile());
+    // this.store.dispatch(ProfileActions.getProfile());
 
     this.user = {
       name: 'Francisco Vaz',
@@ -38,6 +38,9 @@ export class ChangeProfileInfoModalComponent implements OnInit {
 
   handleUpdateUserInfo() {
     console.log('Update user info');
+    this.store.dispatch(ProfileActions.updateProfile({ name: this.user.name, imgUrl: this.user.imgUrl }))
+    // console.log(this.user.name);
+
   }
 
   handleDiscardChanges() {

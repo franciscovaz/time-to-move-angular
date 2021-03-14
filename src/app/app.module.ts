@@ -13,6 +13,8 @@ import { FormsModule } from '@angular/forms';
 
 import { StoreModule } from '@ngrx/store';
 import * as fromAppRoot from './store/app.reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,7 @@ import * as fromAppRoot from './store/app.reducer';
     BrowserModule,
     AppRoutingModule,
     StoreModule.forRoot(fromAppRoot.appReducer),
+    StoreDevtoolsModule.instrument({ logOnly: environment.production }),
     FormsModule
   ],
   providers: [],
