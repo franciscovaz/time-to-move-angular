@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
-  isProfileChangeModalOpen = true;
+  isProfileChangeModalOpen = false;
 
   constructor() { }
 

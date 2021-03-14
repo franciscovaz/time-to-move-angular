@@ -11,6 +11,9 @@ import { ChallengeBoxComponent } from './components/challenge-box/challenge-box.
 import { ChangeProfileInfoModalComponent } from './components/change-profile-info-modal/change-profile-info-modal.component';
 import { FormsModule } from '@angular/forms';
 
+import { StoreModule } from '@ngrx/store';
+import * as fromAppRoot from './store/app.reducer';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,6 +27,7 @@ import { FormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    StoreModule.forRoot(fromAppRoot.appReducer),
     FormsModule
   ],
   providers: [],
