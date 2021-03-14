@@ -8,6 +8,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { CompletedChallengesComponent } from './components/completed-challenges/completed-challenges.component';
 import { CountdownComponent } from './components/countdown/countdown.component';
 import { ChallengeBoxComponent } from './components/challenge-box/challenge-box.component';
+import { ChangeProfileInfoModalComponent } from './components/change-profile-info-modal/change-profile-info-modal.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ChallengeBoxComponent } from './components/challenge-box/challenge-box.
     ProfileComponent,
     CompletedChallengesComponent,
     CountdownComponent,
-    ChallengeBoxComponent
+    ChallengeBoxComponent,
+    ChangeProfileInfoModalComponent
   ],
   imports: [
     BrowserModule,
