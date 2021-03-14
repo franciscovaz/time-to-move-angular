@@ -12,4 +12,9 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  handleChangeUser() {
+    console.log('Change user');
+    // open modal to change name and image of user
+  }
+
 }
