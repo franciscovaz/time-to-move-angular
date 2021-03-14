@@ -2,10 +2,28 @@
   <div class="container">
     <header>Change profile info</header>
 
-    <strong>Francisco Vaz</strong>
-    <p>Change your info</p>
+    <form #f1="ngForm">
 
-    <button type="button" (click)="handleCloseProfileModal()">
+      <div class="field">
+        <label for="name">User name</label>
+        <input type="text" name="name" id="name" [(ngModel)]="user.name" #name="ngModel">
+      </div>
+
+      <div class="field">
+        <label for="imgUrl">Profile image URL</label>
+        <input type="text" name="imgUrl" id="imgUrl" [(ngModel)]="user.imgUrl" #imgUrl="ngModel">
+      </div>
+
+      <div class="modalFooter">
+        <button type="button" (click)="handleUpdateUserInfo()">Save</button>
+        <button type="button" (click)="handleDiscardChanges()">Discard</button>
+      </div>
+
+    </form>
+
+
+
+    <button type="button" class="closeButton" (click)="handleCloseProfileModal()">
       <img src="assets/icons/close.svg" alt="Close Info Modal">
     </button>
   </div>

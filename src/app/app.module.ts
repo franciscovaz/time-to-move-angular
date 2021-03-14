@@ -9,6 +9,7 @@ import { CompletedChallengesComponent } from './components/completed-challenges/
 import { CountdownComponent } from './components/countdown/countdown.component';
 import { ChallengeBoxComponent } from './components/challenge-box/challenge-box.component';
 import { ChangeProfileInfoModalComponent } from './components/change-profile-info-modal/change-profile-info-modal.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ChangeProfileInfoModalComponent } from './components/change-profile-inf
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

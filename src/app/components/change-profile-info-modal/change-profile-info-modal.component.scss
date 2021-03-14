@@ -1,0 +1,104 @@
+.overlay {
+  background: rgba(242, 243, 245, 0.8);
+
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  background: var(--white);
+  width: 100%;
+  max-width: 400px;
+  padding: 2rem 3rem;
+
+  border-radius: 5px;
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.05);
+
+  position: relative;
+
+  header {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--blue);
+    text-align: center;
+  }
+
+  form {
+    margin-top: 1rem;
+
+    display: flex;
+    flex-direction: column;
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 16px;
+
+      label {
+        margin-bottom: 8px;
+      }
+
+      input {
+        background: #f0f0f5;
+        border-radius: 8px;
+        border: 0;
+        padding: 16px 24px;
+        color: #6c6c80;
+      }
+    }
+
+    .modalFooter {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+
+      & button:first-child {
+        background: var(--green);
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+
+      & button:last-child {
+        &:hover {
+          background: var(--background);
+        }
+      }
+
+      button {
+        flex: 1;
+
+        width: 100%;
+        height: 2rem;
+
+        margin-top: 1rem;
+
+        border: 0;
+        border-radius: 5px;
+
+        color: var(--white);
+
+        font-size: 1rem;
+        font-weight: 400;
+
+        transition: background-color 0.2s;
+      }
+    }
+  }
+
+  .closeButton {
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+    background: transparent;
+    border: 0;
+    font-size: 0px; /* hack - quando o botao so tem um icone, tem menos espaco em cima */
+  }
+}
