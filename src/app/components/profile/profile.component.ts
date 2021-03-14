@@ -37,7 +37,9 @@ export class ProfileComponent implements OnInit {
           isProfileChangeModalOpen: state.profile.isProfileChangeModalOpen
         }
       }
-      if (state.profile.isProfileChangeModalOpen) {
+      if (state.profile.isProfileChangeModalOpen || state.profile.isProfileChangeModalOpen === false) {
+
+        console.log('mudou o modal state: ', state.profile)
         this.profileInfo = {
           name: state.profile.name,
           imgUrl: state.profile.imgUrl,

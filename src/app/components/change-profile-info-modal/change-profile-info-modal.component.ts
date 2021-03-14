@@ -33,7 +33,7 @@ export class ChangeProfileInfoModalComponent implements OnInit {
 
   handleCloseProfileModal() {
     console.log('close modal');
-
+    this.store.dispatch(ProfileActions.openProfileModal({ isModalOpen: false }));
   }
 
   handleUpdateUserInfo() {

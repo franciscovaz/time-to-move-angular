@@ -1,5 +1,5 @@
 <div class="profileContainer">
-  <img src="https://github.com/franciscovaz.png" alt="Francisco Vaz" (click)="handleChangeUser()">
+  <img [src]="profileInfo.imgUrl" alt="Francisco Vaz" (click)="handleChangeUser()">
   <div>
     <strong>{{ profileInfo.name }}</strong>
     <p>
@@ -8,9 +8,6 @@
     </p>
   </div>
 </div>
-<p>
-  {{profileInfo.isProfileChangeModalOpen }}
-</p>
 
 <div *ngIf="profileInfo.isProfileChangeModalOpen">
   <app-change-profile-info-modal></app-change-profile-info-modal>
