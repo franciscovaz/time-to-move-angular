@@ -9,7 +9,7 @@ export interface State {
 
 const initialState: State = {
   profile: {
-    name: '',
+    name: 'John Doe',
     imgUrl: 'https://github.com/franciscovaz.png',
     isProfileChangeModalOpen: false
   }
