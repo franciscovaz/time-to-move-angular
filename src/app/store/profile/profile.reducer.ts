@@ -10,7 +10,7 @@ export interface State {
 const initialState: State = {
   profile: {
     name: '',
-    imgUrl: '',
+    imgUrl: 'https://github.com/franciscovaz.png',
     isProfileChangeModalOpen: false
   }
 }
