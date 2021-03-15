@@ -14,7 +14,7 @@ export class CountdownComponent implements OnInit {
   minutes = Math.floor(this.time / 60);
   seconds = this.time % 60;
 
-  countdownTimeout: NodeJS.Timeout;
+  countdownTimeout;
 
   minuteLeft = String(this.minutes).padStart(2, '0').split('')[0];
   minuteRight = String(this.minutes).padStart(2, '0').split('')[1];
