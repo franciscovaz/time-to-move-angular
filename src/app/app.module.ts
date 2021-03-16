@@ -15,6 +15,7 @@ import { StoreModule } from '@ngrx/store';
 import * as fromAppRoot from './store/app.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
+import { ChangeCountdownTimeModalComponent } from './components/change-countdown-time-modal/change-countdown-time-modal.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { environment } from 'src/environments/environment';
     CompletedChallengesComponent,
     CountdownComponent,
     ChallengeBoxComponent,
-    ChangeProfileInfoModalComponent
+    ChangeProfileInfoModalComponent,
+    ChangeCountdownTimeModalComponent
   ],
   imports: [
     BrowserModule,

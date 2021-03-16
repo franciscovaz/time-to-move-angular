@@ -1,5 +1,5 @@
 <div>
-  <div class="countdownContainer">
+  <div class="countdownContainer" (click)="handleUpdateCountdown()">
     <div>
       <span>{{ minuteLeft }}</span>
       <span>{{ minuteRight }}</span>
@@ -12,4 +12,8 @@
   </div>
 
   <button class="countdownButton" (click)="startCountdown()">Start cycle</button>
+</div>
+
+<div *ngIf="isNewCountdownTimeModalOpen">
+  <app-change-countdown-time-modal></app-change-countdown-time-modal>
 </div>

@@ -24,7 +24,7 @@ export class CountdownComponent implements OnInit {
   secondRight = String(this.seconds).padStart(2, '0').split('')[1];
 
 
-
+  isNewCountdownTimeModalOpen = false;
 
 
   countdownTimeout$;
@@ -76,6 +76,11 @@ export class CountdownComponent implements OnInit {
     this.isActive = true;
     this.countdown();
 
+  }
+
+  handleUpdateCountdown() {
+    // open modal
+    this.isNewCountdownTimeModalOpen = true;
   }
 
   resetCountdown() {
