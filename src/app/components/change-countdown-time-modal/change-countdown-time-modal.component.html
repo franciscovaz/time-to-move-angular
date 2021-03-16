@@ -1,1 +1,25 @@
-<p>change-countdown-time-modal works!</p>
+<div class="overlay">
+  <div class="container">
+    <header>Change countdown time</header>
+
+    <form #f2="ngForm">
+
+      <div class="field">
+        <label for="countdownTime">Cycle time</label>
+        <input type="number" name="countdownTime" id="countdownTime" min="1" max="60" [(ngModel)]="countdownTime">
+      </div>
+
+      <div class="modalFooter">
+        <button type="button" (click)="handleUpdateCountdownTime()">Save</button>
+        <button type="button" (click)="handleDiscardChanges()">Discard</button>
+      </div>
+
+    </form>
+
+
+
+    <button type="button" class="closeButton" (click)="handleCloseCountdownModal()">
+      <img src="assets/icons/close.svg" alt="Close Info Modal">
+    </button>
+  </div>
+</div>

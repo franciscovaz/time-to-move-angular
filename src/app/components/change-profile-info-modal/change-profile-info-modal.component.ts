@@ -32,12 +32,10 @@ export class ChangeProfileInfoModalComponent implements OnInit {
   }
 
   handleCloseProfileModal() {
-    console.log('close modal');
     this.store.dispatch(ProfileActions.openProfileModal({ isModalOpen: false }));
   }
 
   handleUpdateUserInfo() {
-    console.log('Update user info');
     this.store.dispatch(ProfileActions.updateProfile({ name: this.user.name, imgUrl: this.user.imgUrl }))
     // console.log(this.user.name);
 
