@@ -28,8 +28,6 @@ export class CountdownComponent implements OnInit {
 
 
   countdownTimeout$;
-
-  counter$: Observable<number>;
   subscription: Subscription;
 
   private firstSub: Subscription;
@@ -37,7 +35,6 @@ export class CountdownComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(String(this.seconds).padStart(2, '0').split('')[0]);
 
   }
 
@@ -47,28 +44,18 @@ export class CountdownComponent implements OnInit {
 
 
   countdown() {
-
-
-
     if (this.isActive && this.time > 0) {
-
       this.firstSub = interval(1000).subscribe(() => {
         this.time = this.time - 1;
-
         if (this.isActive && this.time === 0) {
           this.hasFinished = true;
           this.isActive = false;
           // TODO começar novo desafio
-
-
           this.firstSub.unsubscribe();
         }
 
-
-
         this.minutes = Math.floor(this.time / 60);
         this.seconds = this.time % 60;
-
 
         this.minuteLeft = String(this.minutes).padStart(2, '0').split('')[0];
         this.minuteRight = String(this.minutes).padStart(2, '0').split('')[1];
@@ -77,20 +64,12 @@ export class CountdownComponent implements OnInit {
         this.secondRight = String(this.seconds).padStart(2, '0').split('')[1];
 
       })
-
-
-
-
     } else if (this.isActive && this.time === 0) {
       this.hasFinished = true;
       this.isActive = false;
       // TODO começar novo desafio
-      console.log('cheguei');
-
-
       this.firstSub.unsubscribe();
     }
-
   }
 
   startCountdown() {
@@ -100,7 +79,7 @@ export class CountdownComponent implements OnInit {
   }
 
   resetCountdown() {
-    clearTimeout(this.countdownTimeout$);
+    this.firstSub.unsubscribe();
     this.isActive = false;
     this.time = 25 * 60;
     this.hasFinished = false;
