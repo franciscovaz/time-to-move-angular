@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+
+import * as AppStore from '../../store/app.reducer';
+import * as CountdownActions from '../../store/countdown/countdown.actions';
 
 @Component({
   selector: 'app-change-countdown-time-modal',
@@ -9,7 +13,9 @@ export class ChangeCountdownTimeModalComponent implements OnInit {
 
   countdownTime = 25;
 
-  constructor() { }
+  constructor(
+    private store: Store<AppStore.AppState>
+  ) { }
 
 
   ngOnInit(): void {
@@ -17,14 +23,14 @@ export class ChangeCountdownTimeModalComponent implements OnInit {
   }
 
   handleCloseCountdownModal() {
-    console.log('close modal');
+    this.store.dispatch(CountdownActions.openCountdownModal({ isModalOpen: false }))
   }
 
   handleUpdateCountdownTime() {
     let timeToSend = this.countdownTime * 60;
-    // console.log('Update user info');
-    console.log(timeToSend);
 
+    this.store.dispatch(CountdownActions.updateCountdownTime({ countdownTime: timeToSend }));
+    this.store.dispatch(CountdownActions.openCountdownModal({ isModalOpen: false }));
   }
 
   handleDiscardChanges() {
