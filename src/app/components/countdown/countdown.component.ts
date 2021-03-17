@@ -1,7 +1,10 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
-import { interval, Observable, Subscription, timer } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { interval, Subscription } from 'rxjs';
 
-import { tap } from 'rxjs/operators';
+import * as AppRoot from '../../store/app.reducer';
+import * as CountdownActions from '../../store/countdown/countdown.actions';
+
 
 @Component({
   selector: 'app-countdown',
@@ -32,10 +35,15 @@ export class CountdownComponent implements OnInit {
 
   private firstSub: Subscription;
 
-  constructor() { }
+  constructor(
+    private store: Store<AppRoot.AppState>
+  ) { }
 
   ngOnInit(): void {
+    this.store.select('countdown').subscribe(data => {
+      this.isNewCountdownTimeModalOpen = data.countdown.isModalOpen;
 
+    })
   }
 
   ngOnDestroy(): void {
@@ -75,12 +83,11 @@ export class CountdownComponent implements OnInit {
   startCountdown() {
     this.isActive = true;
     this.countdown();
-
   }
 
   handleUpdateCountdown() {
     // open modal
-    this.isNewCountdownTimeModalOpen = true;
+    this.store.dispatch(CountdownActions.openCountdownModal({ isModalOpen: true }))
   }
 
   resetCountdown() {
