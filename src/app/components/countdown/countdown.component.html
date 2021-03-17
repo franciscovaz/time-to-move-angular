@@ -11,7 +11,13 @@
     </div>
   </div>
 
-  <button class="countdownButton" (click)="startCountdown()">Start cycle</button>
+  <div *ngIf="!isActive; else notActive">
+    <button class="countdownButton" (click)="startCountdown()">Start cycle</button>
+  </div>
+
+  <ng-template #notActive>
+    <button class="countdownLeaveButton" (click)="resetCountdown()">Leave cycle</button>
+  </ng-template>
 </div>
 
 <div *ngIf="isNewCountdownTimeModalOpen">
