@@ -68,3 +68,13 @@
     cursor: not-allowed;
   }
 }
+
+.countdownLeaveButton {
+  background: var(--white);
+  color: var(--title);
+}
+
+.countdownLeaveButton:not(:disabled):hover {
+  background: var(--red);
+  color: var(--white);
+}
