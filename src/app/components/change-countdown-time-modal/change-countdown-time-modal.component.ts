@@ -36,6 +36,7 @@ export class ChangeCountdownTimeModalComponent implements OnInit {
   handleDiscardChanges() {
     console.log('Discard changes');
     // for now, just close it!
+    this.store.dispatch(CountdownActions.openCountdownModal({ isModalOpen: false }))
   }
 
 }
