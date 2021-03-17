@@ -17,7 +17,8 @@ export class CountdownComponent implements OnInit {
   isActive = false;
   hasFinished = false;
 
-  time: number;
+  storedTime: number;
+  currentTime: number;
   minutes: number;
   seconds: number;
   minuteLeft: string;
@@ -41,10 +42,11 @@ export class CountdownComponent implements OnInit {
   ngOnInit(): void {
     this.store.select('countdown').subscribe(data => {
       this.isNewCountdownTimeModalOpen = data.countdown.isModalOpen;
-      this.time = data.countdown.countdownTime;
+      this.currentTime = data.countdown.countdownTime;
+      this.storedTime = data.countdown.countdownTime;
 
-      this.minutes = Math.floor(this.time / 60);
-      this.seconds = this.time % 60;
+      this.minutes = Math.floor(this.currentTime / 60);
+      this.seconds = this.currentTime % 60;
 
       this.minuteLeft = String(this.minutes).padStart(2, '0').split('')[0];
       this.minuteRight = String(this.minutes).padStart(2, '0').split('')[1];
@@ -60,18 +62,18 @@ export class CountdownComponent implements OnInit {
 
 
   countdown() {
-    if (this.isActive && this.time > 0) {
+    if (this.isActive && this.currentTime > 0) {
       this.firstSub = interval(1000).subscribe(() => {
-        this.time = this.time - 1;
-        if (this.isActive && this.time === 0) {
+        this.currentTime = this.currentTime - 1;
+        if (this.isActive && this.currentTime === 0) {
           this.hasFinished = true;
           this.isActive = false;
           // TODO começar novo desafio
           this.firstSub.unsubscribe();
         }
 
-        this.minutes = Math.floor(this.time / 60);
-        this.seconds = this.time % 60;
+        this.minutes = Math.floor(this.currentTime / 60);
+        this.seconds = this.currentTime % 60;
 
         this.minuteLeft = String(this.minutes).padStart(2, '0').split('')[0];
         this.minuteRight = String(this.minutes).padStart(2, '0').split('')[1];
@@ -80,7 +82,7 @@ export class CountdownComponent implements OnInit {
         this.secondRight = String(this.seconds).padStart(2, '0').split('')[1];
 
       })
-    } else if (this.isActive && this.time === 0) {
+    } else if (this.isActive && this.currentTime === 0) {
       this.hasFinished = true;
       this.isActive = false;
       // TODO começar novo desafio
@@ -101,8 +103,10 @@ export class CountdownComponent implements OnInit {
   resetCountdown() {
     this.firstSub.unsubscribe();
     this.isActive = false;
-    this.time = 25 * 60;
     this.hasFinished = false;
+    console.log(this.storedTime);
+
+    this.store.dispatch(CountdownActions.updateCountdownTime({ countdownTime: this.storedTime }))
   }
 
 }
