@@ -11,7 +11,7 @@ import * as CountdownActions from '../../store/countdown/countdown.actions';
 })
 export class ChangeCountdownTimeModalComponent implements OnInit {
 
-  countdownTime = 25;
+  countdownTime: number;
 
   constructor(
     private store: Store<AppStore.AppState>
@@ -19,7 +19,9 @@ export class ChangeCountdownTimeModalComponent implements OnInit {
 
 
   ngOnInit(): void {
-    // this.store.dispatch(ProfileActions.getProfile());
+    this.store.select('countdown').subscribe(data => {
+      this.countdownTime = data.countdown.countdownTime;
+    })
   }
 
   handleCloseCountdownModal() {

@@ -13,18 +13,17 @@ import * as CountdownActions from '../../store/countdown/countdown.actions';
 })
 export class CountdownComponent implements OnInit {
 
-  time = 0.1 * 60;
+  // time = 0.1 * 60;
   isActive = false;
   hasFinished = false;
 
-  minutes = Math.floor(this.time / 60);
-  seconds = this.time % 60;
-
-  minuteLeft = String(this.minutes).padStart(2, '0').split('')[0];
-  minuteRight = String(this.minutes).padStart(2, '0').split('')[1];
-
-  secondLeft = String(this.seconds).padStart(2, '0').split('')[0];
-  secondRight = String(this.seconds).padStart(2, '0').split('')[1];
+  time: number;
+  minutes: number;
+  seconds: number;
+  minuteLeft: string;
+  minuteRight: string;
+  secondLeft: string;
+  secondRight: string;
 
 
   isNewCountdownTimeModalOpen = false;
@@ -42,7 +41,16 @@ export class CountdownComponent implements OnInit {
   ngOnInit(): void {
     this.store.select('countdown').subscribe(data => {
       this.isNewCountdownTimeModalOpen = data.countdown.isModalOpen;
+      this.time = data.countdown.countdownTime;
 
+      this.minutes = Math.floor(this.time / 60);
+      this.seconds = this.time % 60;
+
+      this.minuteLeft = String(this.minutes).padStart(2, '0').split('')[0];
+      this.minuteRight = String(this.minutes).padStart(2, '0').split('')[1];
+
+      this.secondLeft = String(this.seconds).padStart(2, '0').split('')[0];
+      this.secondRight = String(this.seconds).padStart(2, '0').split('')[1];
     })
   }
 
