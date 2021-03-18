@@ -53,7 +53,13 @@ export class CountdownComponent implements OnInit {
 
       this.secondLeft = String(this.seconds).padStart(2, '0').split('')[0];
       this.secondRight = String(this.seconds).padStart(2, '0').split('')[1];
-    })
+
+      // hasFinished
+      this.hasFinished = data.countdown.hasFinished;
+      // isActive
+      this.isActive = data.countdown.isActive;
+    });
+
   }
 
   ngOnDestroy(): void {
@@ -66,8 +72,11 @@ export class CountdownComponent implements OnInit {
       this.firstSub = interval(1000).subscribe(() => {
         this.currentTime = this.currentTime - 1;
         if (this.isActive && this.currentTime === 0) {
-          this.hasFinished = true;
-          this.isActive = false;
+          this.store.dispatch(CountdownActions.countdownHasFinished({ hasFinished: true }))
+          this.store.dispatch(CountdownActions.countdownIsActive({ isActive: false }))
+
+          // this.hasFinished = true;
+          //this.isActive = false;
           // TODO começar novo desafio
           this.firstSub.unsubscribe();
         }
@@ -83,8 +92,10 @@ export class CountdownComponent implements OnInit {
 
       })
     } else if (this.isActive && this.currentTime === 0) {
-      this.hasFinished = true;
-      this.isActive = false;
+      this.store.dispatch(CountdownActions.countdownHasFinished({ hasFinished: true }))
+      // this.hasFinished = true;
+      this.store.dispatch(CountdownActions.countdownIsActive({ isActive: false }))
+      //this.isActive = false;
       // TODO começar novo desafio
       this.firstSub.unsubscribe();
 
@@ -92,7 +103,9 @@ export class CountdownComponent implements OnInit {
   }
 
   startCountdown() {
-    this.isActive = true;
+    // this.isActive = true;
+    this.store.dispatch(CountdownActions.countdownIsActive({ isActive: true }))
+
     this.countdown();
   }
 
@@ -103,8 +116,11 @@ export class CountdownComponent implements OnInit {
 
   resetCountdown() {
     this.firstSub.unsubscribe();
-    this.isActive = false;
-    this.hasFinished = false;
+    // this.isActive = false;
+    // this.hasFinished = false;
+    this.store.dispatch(CountdownActions.countdownHasFinished({ hasFinished: false }))
+    this.store.dispatch(CountdownActions.countdownIsActive({ isActive: false }))
+
     console.log(this.storedTime);
 
     this.store.dispatch(CountdownActions.updateCountdownTime({ countdownTime: this.storedTime }))
