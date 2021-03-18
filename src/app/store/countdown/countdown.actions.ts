@@ -14,3 +14,17 @@ export const updateCountdownTime = createAction(
     countdownTime: number
   }>()
 );
+
+export const countdownHasFinished = createAction(
+  '[Countdown] Countdown has finished',
+  props<{
+    hasFinished: boolean
+  }>()
+);
+
+export const countdownIsActive = createAction(
+  '[Countdown] Countdown is active',
+  props<{
+    isActive: boolean
+  }>()
+);

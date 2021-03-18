@@ -9,8 +9,10 @@ export interface State {
 
 const initialState: State = {
   countdown: {
-    countdownTime: 25 * 60,
-    isModalOpen: false
+    countdownTime: 0.1 * 60,
+    isModalOpen: false,
+    hasFinished: false,
+    isActive: false
   }
 }
 
@@ -35,6 +37,28 @@ const _countdownReducer = createReducer(
       countdown: {
         ...state.countdown,
         countdownTime: action.countdownTime * 60
+      }
+    })
+  ),
+
+  on(
+    CountdownActions.countdownHasFinished,
+    (state, action) => ({
+      ...state,
+      countdown: {
+        ...state.countdown,
+        hasFinished: action.hasFinished
+      }
+    })
+  ),
+
+  on(
+    CountdownActions.countdownIsActive,
+    (state, action) => ({
+      ...state,
+      countdown: {
+        ...state.countdown,
+        isActive: action.isActive
       }
     })
   )

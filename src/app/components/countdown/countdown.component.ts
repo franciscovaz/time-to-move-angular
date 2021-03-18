@@ -87,6 +87,7 @@ export class CountdownComponent implements OnInit {
       this.isActive = false;
       // TODO começar novo desafio
       this.firstSub.unsubscribe();
+
     }
   }
 
