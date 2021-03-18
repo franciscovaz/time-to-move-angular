@@ -20,7 +20,9 @@ export class ChangeCountdownTimeModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.select('countdown').subscribe(data => {
-      this.countdownTime = data.countdown.countdownTime;
+      console.log(data.countdown.countdownTime / 60);
+
+      this.countdownTime = data.countdown.countdownTime / 60;
     })
   }
 
@@ -29,9 +31,9 @@ export class ChangeCountdownTimeModalComponent implements OnInit {
   }
 
   handleUpdateCountdownTime() {
-    let timeToSend = this.countdownTime * 60;
+    // let timeToSend = this.countdownTime * 60;
 
-    this.store.dispatch(CountdownActions.updateCountdownTime({ countdownTime: timeToSend }));
+    this.store.dispatch(CountdownActions.updateCountdownTime({ countdownTime: this.countdownTime }));
     this.store.dispatch(CountdownActions.openCountdownModal({ isModalOpen: false }));
   }
 
