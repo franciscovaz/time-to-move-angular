@@ -15,6 +15,13 @@ export const updateCountdownTime = createAction(
   }>()
 );
 
+export const resetCountdown = createAction(
+  '[Countdown] Update countdown time',
+  props<{
+    countdownTime: number
+  }>()
+);
+
 export const countdownHasFinished = createAction(
   '[Countdown] Countdown has finished',
   props<{

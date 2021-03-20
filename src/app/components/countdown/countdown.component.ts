@@ -124,8 +124,8 @@ export class CountdownComponent implements OnInit {
     this.store.dispatch(CountdownActions.countdownIsActive({ isActive: false }))
 
     console.log(this.storedTime);
-
-    this.store.dispatch(CountdownActions.updateCountdownTime({ countdownTime: this.storedTime }))
+    this.store.dispatch(CountdownActions.resetCountdown({ countdownTime: this.storedTime }))
+    //this.store.dispatch(CountdownActions.updateCountdownTime({ countdownTime: this.storedTime }))
   }
 
 }
