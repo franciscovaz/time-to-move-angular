@@ -1,9 +1,32 @@
 <div class="challengeBoxContainer">
-  <div class="challengeNotActive">
+  <div class="challengeActive" *ngIf="challenge">
+    <header> Win {{ challenge.amount }} xp</header>
+
+    <main>
+      <img src="assets/icons/body.svg">
+      <strong>New challenge</strong>
+      <p>{{ challenge.description }}</p>
+    </main>
+
+    <footer>
+      <button type="button" class="challengeFailedButton">
+        Failed
+      </button>
+      <button type="button" class="challengeSucceededButton">
+        Completed
+      </button>
+    </footer>
+  </div>
+
+  <div class="challengeNotActive" *ngIf="!challenge">
     <strong>Finish one cycle to receive a challenge</strong>
     <p>
       <img src="/assets/icons/level-up.svg" alt="Level up" />
       Level up by completing challenges!
     </p>
   </div>
+
+
+
+
 </div>

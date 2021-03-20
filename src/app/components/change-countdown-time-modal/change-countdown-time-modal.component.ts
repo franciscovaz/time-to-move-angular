@@ -29,7 +29,6 @@ export class ChangeCountdownTimeModalComponent implements OnInit {
   }
 
   handleUpdateCountdownTime() {
-    // let timeToSend = this.countdownTime * 60;
 
     this.store.dispatch(CountdownActions.updateCountdownTime({ countdownTime: this.countdownTime * 60 }));
     this.store.dispatch(CountdownActions.openCountdownModal({ isModalOpen: false }));
