@@ -3,16 +3,16 @@
     <header> Win {{ challenge.amount }} xp</header>
 
     <main>
-      <img src="assets/icons/body.svg">
+      <img src='{{ "assets/icons/" + challenge.type + ".svg" }}'>
       <strong>New challenge</strong>
       <p>{{ challenge.description }}</p>
     </main>
 
     <footer>
-      <button type="button" class="challengeFailedButton">
+      <button type="button" class="challengeFailedButton" (click)="handleFailedChallenge()">
         Failed
       </button>
-      <button type="button" class="challengeSucceededButton">
+      <button type="button" class="challengeSucceededButton" (click)="handleSucceededChallenge()">
         Completed
       </button>
     </footer>
@@ -25,8 +25,4 @@
       Level up by completing challenges!
     </p>
   </div>
-
-
-
-
 </div>

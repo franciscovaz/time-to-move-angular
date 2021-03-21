@@ -106,4 +106,12 @@ export class ChallengeBoxComponent implements OnInit {
     })
   }
 
+  handleFailedChallenge() {
+    console.log('challenge failed');
+  }
+
+  handleSucceededChallenge() {
+    console.log('challenge succeeded');
+  }
+
 }
