@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
-
 import { Store } from '@ngrx/store';
 
 import * as AppStore from '../../store/app.reducer';
+import * as ChallengeActions from '../../store/challenge/challenge.actions';
 
 const challenges = [
   {
@@ -100,18 +99,18 @@ export class ChallengeBoxComponent implements OnInit {
         console.log('acabei!! vou mostrar desafio');
         this.randomChallengeIndex = Math.floor(Math.random() * challenges.length);
         this.challenge = challenges[this.randomChallengeIndex];
-
       }
-
     })
   }
 
   handleFailedChallenge() {
     console.log('challenge failed');
+    this.store.dispatch(ChallengeActions.isChallengeSucceeded({ challengeResponse: false }))
   }
 
   handleSucceededChallenge() {
     console.log('challenge succeeded');
+    this.store.dispatch(ChallengeActions.isChallengeSucceeded({ challengeResponse: true }))
   }
 
 }
