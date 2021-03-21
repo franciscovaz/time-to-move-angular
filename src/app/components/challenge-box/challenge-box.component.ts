@@ -91,7 +91,6 @@ export class ChallengeBoxComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.select('countdown').subscribe(data => {
-      console.log(data.countdown.hasFinished);
       this.hasFinished = data.countdown.hasFinished;
       this.isActive = data.countdown.isActive;
 
@@ -101,16 +100,26 @@ export class ChallengeBoxComponent implements OnInit {
         this.challenge = challenges[this.randomChallengeIndex];
       }
     })
+
+    this.store.select('challenge').subscribe(data => {
+      console.log('data', data.challenge.isChallengeSucceeded);
+      if (!data.challenge.isChallengeSucceeded) {
+        // this.challenge = null;
+      }
+
+    })
   }
 
   handleFailedChallenge() {
     console.log('challenge failed');
-    this.store.dispatch(ChallengeActions.isChallengeSucceeded({ challengeResponse: false }))
+    this.store.dispatch(ChallengeActions.isChallengeSucceeded({ challengeResponse: false }));
+    this.challenge = null;
   }
 
   handleSucceededChallenge() {
     console.log('challenge succeeded');
     this.store.dispatch(ChallengeActions.isChallengeSucceeded({ challengeResponse: true }))
+    this.challenge = null;
   }
 
 }
