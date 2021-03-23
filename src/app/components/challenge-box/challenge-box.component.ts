@@ -118,6 +118,7 @@ export class ChallengeBoxComponent implements OnInit {
     console.log('challenge succeeded');
     this.store.dispatch(ChallengeActions.isChallengeSucceeded({ challengeResponse: true }))
     this.challenge = null;
+    // get xp and sum to current xp on store
   }
 
 }
