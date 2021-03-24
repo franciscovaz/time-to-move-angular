@@ -103,8 +103,6 @@ export class ChallengeBoxComponent implements OnInit {
 
     this.store.select('challenge').subscribe(data => {
       console.log('data', data.challenge.isChallengeSucceeded);
-
-
     })
   }
 
