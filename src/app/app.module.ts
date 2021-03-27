@@ -16,6 +16,8 @@ import * as fromAppRoot from './store/app.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
 import { ChangeCountdownTimeModalComponent } from './components/change-countdown-time-modal/change-countdown-time-modal.component';
+import { EffectsModule } from '@ngrx/effects';
+import { ChallengeEffects } from './store/challenge/challenge.effects';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,7 @@ import { ChangeCountdownTimeModalComponent } from './components/change-countdown
     BrowserModule,
     AppRoutingModule,
     StoreModule.forRoot(fromAppRoot.appReducer),
+    EffectsModule.forRoot([ChallengeEffects]),
     StoreDevtoolsModule.instrument({ logOnly: environment.production }),
     FormsModule
   ],
