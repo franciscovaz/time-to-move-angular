@@ -27,6 +27,7 @@ export class ChallengeEffects {
       ofType(ChallengeActions.isChallengeSucceeded),
       withLatestFrom(this.store.select('challenge')),
       tap(([action, store]) => {
+        // se action.isChallengSuccess dispara uma action para atualizar a store...
         console.log('action Effect: ', action);
         console.log('store Effect: ', store);
 

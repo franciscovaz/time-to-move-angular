@@ -90,6 +90,8 @@ export class ChallengeBoxComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    Notification.requestPermission();
+
     this.store.select('countdown').subscribe(data => {
       this.hasFinished = data.countdown.hasFinished;
       this.isActive = data.countdown.isActive;
@@ -98,6 +100,14 @@ export class ChallengeBoxComponent implements OnInit {
         console.log('acabei!! vou mostrar desafio');
         this.randomChallengeIndex = Math.floor(Math.random() * challenges.length);
         this.challenge = challenges[this.randomChallengeIndex];
+
+        new Audio('/assets/notification.mp3').play();
+
+        if (Notification.permission === 'granted') {
+          new Notification('New challenge 🎉', {
+            body: `Worth ${this.challenge.amount}xp!`
+          })
+        }
       }
     })
 
