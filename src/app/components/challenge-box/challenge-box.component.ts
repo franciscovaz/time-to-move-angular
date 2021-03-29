@@ -68,7 +68,8 @@ const challenges = [
 ]
 
 interface Challenge {
-  type: 'body' | 'eye';
+  // type: 'body' | 'eye';
+  type: string;
   description: string;
   amount: number;
 }
@@ -83,7 +84,9 @@ export class ChallengeBoxComponent implements OnInit {
   hasFinished: boolean;
   isActive: boolean;
   randomChallengeIndex: number;
-  challenge;
+  challenge: Challenge;
+  currentXp: number;
+
 
   constructor(
     private store: Store<AppStore.AppState>
@@ -112,7 +115,8 @@ export class ChallengeBoxComponent implements OnInit {
     })
 
     this.store.select('challenge').subscribe(data => {
-      console.log('data', data.challenge.isChallengeSucceeded);
+      console.log('data', data.challenge.currentExperience);
+      this.currentXp = data.challenge.currentExperience;
     })
   }
 
@@ -123,10 +127,13 @@ export class ChallengeBoxComponent implements OnInit {
   }
 
   handleSucceededChallenge() {
-    console.log('challenge succeeded');
+    console.log('challenge succeeded, amount: ', this.challenge.amount);
     this.store.dispatch(ChallengeActions.isChallengeSucceeded({ challengeResponse: true }))
     this.challenge = null;
     // get xp and sum to current xp on store
+
+    console.log('current: ', this.currentXp);
+
   }
 
 }
