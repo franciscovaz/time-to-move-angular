@@ -13,6 +13,7 @@ export interface State {
     isChallengeSucceeded: boolean;
     level: number;
     currentExperience: number;
+    experienceToNextLevel: number;
     challengesCompleted: number;
     activeChallenge: Challenge;
   }
@@ -24,6 +25,7 @@ const initialState: State = {
     activeChallenge: null,
     challengesCompleted: 0,
     currentExperience: 0,
+    experienceToNextLevel: 0,
     level: 1
   }
 }
@@ -37,7 +39,8 @@ const _challengeReducer = createReducer(
       ...state,
       challenge: {
         ...state.challenge,
-        isChallengeSucceeded: action.challengeResponse
+        isChallengeSucceeded: action.challengeResponse,
+        currentExperience: action.amount !== 0 ? action.amount + state.challenge.currentExperience : state.challenge.currentExperience,
       }
     })
   ),
