@@ -1,12 +1,7 @@
 import { createReducer, on, Action } from "@ngrx/store";
 
 import * as ChallengeActions from './challenge.actions';
-
-interface Challenge {
-  type: 'body' | 'eye';
-  description: string;
-  amount: number;
-}
+import { Challenge } from "./challenge.module";
 
 export interface State {
   challenge: {
@@ -25,7 +20,7 @@ const initialState: State = {
     activeChallenge: null,
     challengesCompleted: 0,
     currentExperience: 0,
-    experienceToNextLevel: 0,
+    experienceToNextLevel: Math.pow((1 + 1) * 4, 2),
     level: 1
   }
 }
@@ -40,10 +35,19 @@ const _challengeReducer = createReducer(
       challenge: {
         ...state.challenge,
         isChallengeSucceeded: action.challengeResponse,
+        experienceToNextLevel: Math.pow((state.challenge.level + 1) * 4, 2),
         currentExperience: action.amount !== 0 ? action.amount + state.challenge.currentExperience : state.challenge.currentExperience,
       }
     })
   ),
+  on(ChallengeActions.storeActiveChallenge,
+    (state, action) => ({
+      ...state,
+      challenge: {
+        ...state.challenge,
+        activeChallenge: action.activeChallenge
+      }
+    }))
 
 
 )

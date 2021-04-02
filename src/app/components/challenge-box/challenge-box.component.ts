@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Challenge } from 'src/app/store/challenge/challenge.module';
 
 import * as AppStore from '../../store/app.reducer';
 import * as ChallengeActions from '../../store/challenge/challenge.actions';
@@ -67,12 +68,6 @@ const challenges = [
   }
 ]
 
-interface Challenge {
-  // type: 'body' | 'eye';
-  type: string;
-  description: string;
-  amount: number;
-}
 
 @Component({
   selector: 'app-challenge-box',
@@ -100,9 +95,11 @@ export class ChallengeBoxComponent implements OnInit {
       this.isActive = data.countdown.isActive;
 
       if (this.hasFinished && !this.isActive) {
-        console.log('acabei!! vou mostrar desafio');
         this.randomChallengeIndex = Math.floor(Math.random() * challenges.length);
         this.challenge = challenges[this.randomChallengeIndex];
+
+        // guardar challenge na store
+        this.store.dispatch(ChallengeActions.storeActiveChallenge({ activeChallenge: this.challenge }))
 
         new Audio('/assets/notification.mp3').play();
 
@@ -115,7 +112,6 @@ export class ChallengeBoxComponent implements OnInit {
     })
 
     this.store.select('challenge').subscribe(data => {
-      console.log('data', data.challenge.currentExperience);
       this.currentXp = data.challenge.currentExperience;
     })
   }

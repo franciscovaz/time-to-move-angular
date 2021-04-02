@@ -1,4 +1,5 @@
 import { createAction, props } from "@ngrx/store";
+import { Challenge } from "./challenge.module";
 
 export const isChallengeSucceeded = createAction(
   '[Challenge] Is challenge succeeded',
@@ -16,6 +17,9 @@ export const setExperienceLevel = createAction(
 )
 
 
-export const storeChallenge = createAction(
-  '[Challenge] Store Challenge'
+export const storeActiveChallenge = createAction(
+  '[Challenge] Store active challenge',
+  props<{
+    activeChallenge: Challenge,
+  }>()
 )
