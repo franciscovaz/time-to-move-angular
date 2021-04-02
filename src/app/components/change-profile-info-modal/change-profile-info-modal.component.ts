@@ -37,8 +37,6 @@ export class ChangeProfileInfoModalComponent implements OnInit {
 
   handleUpdateUserInfo() {
     this.store.dispatch(ProfileActions.updateProfile({ name: this.user.name, imgUrl: this.user.imgUrl }))
-    // console.log(this.user.name);
-
   }
 
   handleDiscardChanges() {

@@ -30,7 +30,6 @@ export class ProfileComponent implements OnInit {
 
     this.store.select('profile').subscribe(state => {
       if (state.profile.name && state.profile.imgUrl) {
-        console.log(state.profile.name);
         this.profileInfo = {
           name: state.profile.name,
           imgUrl: state.profile.imgUrl,
@@ -38,8 +37,6 @@ export class ProfileComponent implements OnInit {
         }
       }
       if (state.profile.isProfileChangeModalOpen || state.profile.isProfileChangeModalOpen === false) {
-
-        console.log('mudou o modal state: ', state.profile)
         this.profileInfo = {
           name: state.profile.name,
           imgUrl: state.profile.imgUrl,
@@ -52,9 +49,7 @@ export class ProfileComponent implements OnInit {
   }
 
   handleChangeUser() {
-    console.log('Change user');
     this.store.dispatch(ProfileActions.openProfileModal({ isModalOpen: true }));
-    // open modal to change name and image of user
   }
 
 }

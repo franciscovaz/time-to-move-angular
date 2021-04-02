@@ -43,7 +43,6 @@ export class CountdownComponent implements OnInit {
     this.store.select('countdown').subscribe(data => {
       this.isNewCountdownTimeModalOpen = data.countdown.isModalOpen;
       this.currentTime = data.countdown.countdownTime;
-      console.log('stored: ', data.countdown.countdownTime);
 
       this.storedTime = data.countdown.countdownTime;
 
