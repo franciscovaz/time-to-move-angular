@@ -36,11 +36,16 @@ export class ChallengeEffects {
 
         let finalExperience = currentExperience + amount;
 
+        console.log('Current Experience: ', currentExperience);
+        console.log('To next level: ', experienceToNextLevel);
+        console.log('Final Experience: ', finalExperience);
+
         if (finalExperience >= experienceToNextLevel) {
           finalExperience = finalExperience - experienceToNextLevel;
-          // dispatch level up action
+          console.log('Final Experience: ', finalExperience);
           this.store.dispatch(ChallengeActions.levelUp());
         }
+        this.store.dispatch(ChallengeActions.setCurrentExperience({ currentExperience: finalExperience }))
 
         return store;
       })

@@ -9,10 +9,10 @@ export const isChallengeSucceeded = createAction(
   }>()
 )
 
-export const setExperienceLevel = createAction(
-  '[Challenge] Set new experience level',
+export const setCurrentExperience = createAction(
+  '[Challenge] Set current experience',
   props<{
-    amount: boolean,
+    currentExperience: number,
   }>()
 )
 

@@ -36,7 +36,6 @@ const _challengeReducer = createReducer(
         ...state.challenge,
         isChallengeSucceeded: action.challengeResponse,
         experienceToNextLevel: Math.pow((state.challenge.level + 1) * 4, 2),
-        currentExperience: action.amount !== 0 ? action.amount + state.challenge.currentExperience : state.challenge.currentExperience,
         activeChallenge: null,
         challengesCompleted: state.challenge.challengesCompleted + 1,
       }
@@ -49,6 +48,16 @@ const _challengeReducer = createReducer(
       challenge: {
         ...state.challenge,
         activeChallenge: action.activeChallenge
+      }
+    })
+  ),
+  on(
+    ChallengeActions.setCurrentExperience,
+    (state, action) => ({
+      ...state,
+      challenge: {
+        ...state.challenge,
+        currentExperience: action.currentExperience
       }
     })
   ),

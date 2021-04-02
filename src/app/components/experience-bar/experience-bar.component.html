@@ -1,9 +1,9 @@
 <header class="experienceBar">
   <span>0px</span>
   <div>
-    <div style="width: 25%"></div>
+    <div [ngStyle]="{'width': formatedPercentToNextLevel}"></div>
 
-    <span class="currentExperience" style="left: 25%">25 xp</span>
+    <span class="currentExperience" [ngStyle]="{'left' : formatedPercentToNextLevel}">{{ currentExperience }} xp</span>
   </div>
-  <span>100 xp</span>
+  <span>{{ experienceToNextLevel }} xp</span>
 </header>
