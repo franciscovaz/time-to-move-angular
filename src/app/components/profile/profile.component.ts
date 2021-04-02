@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Profile } from 'src/app/store/profile/profile.module';
 import * as fromAppRoot from '../../store/app.reducer';
 import * as ProfileActions from '../../store/profile/profile.actions';
@@ -14,6 +16,7 @@ export class ProfileComponent implements OnInit {
 
   isProfileChangeModalOpen = false;
   profileInfo: Profile;
+  level$: Observable<number>;
 
   constructor(
     private store: Store<fromAppRoot.AppState>
@@ -44,7 +47,11 @@ export class ProfileComponent implements OnInit {
         }
       }
 
-    })
+    });
+
+    this.level$ = this.store.select('challenge').pipe(
+      map(data => data.challenge.level)
+    )
 
   }
 
