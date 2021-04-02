@@ -16,6 +16,10 @@ export const setExperienceLevel = createAction(
   }>()
 )
 
+export const levelUp = createAction(
+  '[Challenge] Level up',
+)
+
 
 export const storeActiveChallenge = createAction(
   '[Challenge] Store active challenge',

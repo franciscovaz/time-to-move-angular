@@ -31,6 +31,17 @@ export class ChallengeEffects {
         console.log('action Effect: ', action);
         console.log('store Effect: ', store);
 
+        const { amount } = action;
+        const { experienceToNextLevel, currentExperience } = store.challenge;
+
+        let finalExperience = currentExperience + amount;
+
+        if (finalExperience >= experienceToNextLevel) {
+          finalExperience = finalExperience - experienceToNextLevel;
+          // dispatch level up action
+          this.store.dispatch(ChallengeActions.levelUp());
+        }
+
         return store;
       })
     ), { dispatch: false })

@@ -37,17 +37,32 @@ const _challengeReducer = createReducer(
         isChallengeSucceeded: action.challengeResponse,
         experienceToNextLevel: Math.pow((state.challenge.level + 1) * 4, 2),
         currentExperience: action.amount !== 0 ? action.amount + state.challenge.currentExperience : state.challenge.currentExperience,
+        activeChallenge: null,
+        challengesCompleted: state.challenge.challengesCompleted + 1,
       }
     })
   ),
-  on(ChallengeActions.storeActiveChallenge,
+  on(
+    ChallengeActions.storeActiveChallenge,
     (state, action) => ({
       ...state,
       challenge: {
         ...state.challenge,
         activeChallenge: action.activeChallenge
       }
-    }))
+    })
+  ),
+  on(
+    ChallengeActions.levelUp,
+    (state, action) => ({
+      ...state,
+      challenge: {
+        ...state.challenge,
+        level: state.challenge.level + 1,
+        experienceToNextLevel: Math.pow((state.challenge.level + 2) * 4, 2),
+      }
+    })
+  )
 
 
 )
