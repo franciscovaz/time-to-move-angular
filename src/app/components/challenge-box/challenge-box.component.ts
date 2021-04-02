@@ -128,7 +128,7 @@ export class ChallengeBoxComponent implements OnInit {
     this.challenge = null;
     // get xp and sum to current xp on store
 
-    console.log('current: ', this.currentXp);
+    // console.log('current: ', this.currentXp);
 
   }
 
