@@ -16,6 +16,7 @@ export class CountdownComponent implements OnInit {
   // time = 0.1 * 60;
   isActive = false;
   hasFinished = false;
+  isChallengeActive: boolean;
 
   storedTime: number;
   currentTime: number;
@@ -54,12 +55,21 @@ export class CountdownComponent implements OnInit {
 
       this.secondLeft = String(this.seconds).padStart(2, '0').split('')[0];
       this.secondRight = String(this.seconds).padStart(2, '0').split('')[1];
+      // console.log('countdown: ', data);
 
       // hasFinished
       this.hasFinished = data.countdown.hasFinished;
       // isActive
       this.isActive = data.countdown.isActive;
     });
+
+    this.store.select('challenge').subscribe(data => {
+
+      this.isChallengeActive = Boolean(data.challenge.activeChallenge);
+      console.log('activeChallenge', this.isChallengeActive);
+
+
+    })
 
   }
 
@@ -75,10 +85,6 @@ export class CountdownComponent implements OnInit {
         if (this.isActive && this.currentTime === 0) {
           this.store.dispatch(CountdownActions.countdownHasFinished({ hasFinished: true }))
           this.store.dispatch(CountdownActions.countdownIsActive({ isActive: false }))
-
-          // this.hasFinished = true;
-          //this.isActive = false;
-          // TODO começar novo desafio
           this.firstSub.unsubscribe();
         }
 
@@ -112,7 +118,9 @@ export class CountdownComponent implements OnInit {
 
   handleUpdateCountdown() {
     // open modal
-    this.store.dispatch(CountdownActions.openCountdownModal({ isModalOpen: true }))
+    if (!this.isActive && !this.isChallengeActive) {
+      this.store.dispatch(CountdownActions.openCountdownModal({ isModalOpen: true }))
+    }
   }
 
   resetCountdown() {

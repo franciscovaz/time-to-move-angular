@@ -25,7 +25,8 @@ const _countdownReducer = createReducer(
       ...state,
       countdown: {
         ...state.countdown,
-        isModalOpen: action.isModalOpen
+        isModalOpen: action.isModalOpen,
+        isActive: false,
       }
     })
   ),
@@ -47,7 +48,8 @@ const _countdownReducer = createReducer(
       ...state,
       countdown: {
         ...state.countdown,
-        hasFinished: action.hasFinished
+        hasFinished: action.hasFinished,
+        isActive: false
       }
     })
   ),

@@ -81,6 +81,7 @@ export class ChallengeBoxComponent implements OnInit {
   randomChallengeIndex: number;
   challenge: Challenge;
   currentXp: number;
+  hasChallenge: Challenge;
 
 
   constructor(
@@ -94,25 +95,30 @@ export class ChallengeBoxComponent implements OnInit {
       this.hasFinished = data.countdown.hasFinished;
       this.isActive = data.countdown.isActive;
 
-      if (this.hasFinished && !this.isActive) {
-        this.randomChallengeIndex = Math.floor(Math.random() * challenges.length);
-        this.challenge = challenges[this.randomChallengeIndex];
+      if (!this.hasChallenge) {
+        if (this.hasFinished && !this.isActive) {
+          this.randomChallengeIndex = Math.floor(Math.random() * challenges.length);
+          this.challenge = challenges[this.randomChallengeIndex];
 
-        // guardar challenge na store
-        this.store.dispatch(ChallengeActions.storeActiveChallenge({ activeChallenge: this.challenge }))
+          // guardar challenge na store
+          this.store.dispatch(ChallengeActions.storeActiveChallenge({ activeChallenge: this.challenge }))
 
-        new Audio('/assets/notification.mp3').play();
+          new Audio('/assets/notification.mp3').play();
 
-        if (Notification.permission === 'granted') {
-          new Notification('New challenge 🎉', {
-            body: `Worth ${this.challenge.amount}xp!`
-          })
+          if (Notification.permission === 'granted') {
+            new Notification('New challenge 🎉', {
+              body: `Worth ${this.challenge.amount}xp!`
+            })
+          }
         }
       }
+
+
     })
 
     this.store.select('challenge').subscribe(data => {
       this.currentXp = data.challenge.currentExperience;
+      this.hasChallenge = data.challenge.activeChallenge;
     })
   }
 
