@@ -27,3 +27,10 @@ export const storeActiveChallenge = createAction(
     activeChallenge: Challenge,
   }>()
 )
+
+export const isLevelUpModalOpen = createAction(
+  '[Countdown] Is level up modal open',
+  props<{
+    isLevelUpModalOpen: boolean
+  }>()
+);

@@ -82,6 +82,7 @@ export class ChallengeBoxComponent implements OnInit {
   challenge: Challenge;
   currentXp: number;
   hasChallenge: Challenge;
+  isLevelUpModalOpen: boolean;
 
 
   constructor(
@@ -119,6 +120,7 @@ export class ChallengeBoxComponent implements OnInit {
     this.store.select('challenge').subscribe(data => {
       this.currentXp = data.challenge.currentExperience;
       this.hasChallenge = data.challenge.activeChallenge;
+      this.isLevelUpModalOpen = data.challenge.isLevelUpModalOpen;
     })
   }
 

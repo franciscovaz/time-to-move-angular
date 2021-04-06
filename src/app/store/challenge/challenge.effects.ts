@@ -25,6 +25,7 @@ export class ChallengeEffects {
         if (finalExperience >= experienceToNextLevel) {
           finalExperience = finalExperience - experienceToNextLevel;
           this.store.dispatch(ChallengeActions.levelUp());
+          this.store.dispatch(ChallengeActions.isLevelUpModalOpen({ isLevelUpModalOpen: true }))
         }
         this.store.dispatch(ChallengeActions.setCurrentExperience({ currentExperience: finalExperience }))
 

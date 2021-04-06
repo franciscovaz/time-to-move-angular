@@ -11,6 +11,7 @@ export interface State {
     experienceToNextLevel: number;
     challengesCompleted: number;
     activeChallenge: Challenge;
+    isLevelUpModalOpen: boolean
   }
 }
 
@@ -21,7 +22,8 @@ const initialState: State = {
     challengesCompleted: 0,
     currentExperience: 0,
     experienceToNextLevel: Math.pow((1 + 1) * 4, 2),
-    level: 1
+    level: 1,
+    isLevelUpModalOpen: false
   }
 }
 
@@ -69,6 +71,15 @@ const _challengeReducer = createReducer(
         ...state.challenge,
         level: state.challenge.level + 1,
         experienceToNextLevel: Math.pow((state.challenge.level + 2) * 4, 2),
+      }
+    })
+  ),
+  on(ChallengeActions.isLevelUpModalOpen,
+    (state, action) => ({
+      ...state,
+      challenge: {
+        ...state.challenge,
+        isLevelUpModalOpen: action.isLevelUpModalOpen
       }
     })
   )

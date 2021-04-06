@@ -18,6 +18,7 @@ import { environment } from 'src/environments/environment';
 import { ChangeCountdownTimeModalComponent } from './components/change-countdown-time-modal/change-countdown-time-modal.component';
 import { EffectsModule } from '@ngrx/effects';
 import { ChallengeEffects } from './store/challenge/challenge.effects';
+import { LevelUpModalComponent } from './components/level-up-modal/level-up-modal.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ChallengeEffects } from './store/challenge/challenge.effects';
     CountdownComponent,
     ChallengeBoxComponent,
     ChangeProfileInfoModalComponent,
-    ChangeCountdownTimeModalComponent
+    ChangeCountdownTimeModalComponent,
+    LevelUpModalComponent
   ],
   imports: [
     BrowserModule,

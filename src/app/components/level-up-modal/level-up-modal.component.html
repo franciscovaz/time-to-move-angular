@@ -1,0 +1,13 @@
+<div class="overlay">
+  <div class="container">
+    <header>{{level$ | async }}</header>
+
+    <strong>Congratiolations</strong>
+    <p>You have reached a new level</p>
+
+
+    <button type="button" (click)="handleCloseLevelUpModal()">
+      <img src="assets/icons/close.svg" alt="Close level  up modal">
+    </button>
+  </div>
+</div>
