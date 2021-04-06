@@ -66,7 +66,6 @@ export class CountdownComponent implements OnInit {
     this.store.select('challenge').subscribe(data => {
 
       this.isChallengeActive = Boolean(data.challenge.activeChallenge);
-      console.log('activeChallenge', this.isChallengeActive);
 
 
     })

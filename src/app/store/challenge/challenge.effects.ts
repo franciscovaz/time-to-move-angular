@@ -5,6 +5,7 @@ import { tap, withLatestFrom } from 'rxjs/operators';
 
 import * as fromAppRoot from '../app.reducer';
 import * as ChallengeActions from '../challenge/challenge.actions';
+import * as CountdownActions from '../countdown/countdown.actions';
 
 @Injectable()
 export class ChallengeEffects {
@@ -13,6 +14,8 @@ export class ChallengeEffects {
       ofType(ChallengeActions.isChallengeSucceeded),
       withLatestFrom(this.store.select('challenge')),
       tap(([action, store]) => {
+        this.store.dispatch(CountdownActions.countdownHasFinished({ hasFinished: false }))
+
         // se action.isChallengSuccess dispara uma action para atualizar a store...
         const { amount } = action;
         const { experienceToNextLevel, currentExperience } = store.challenge;
