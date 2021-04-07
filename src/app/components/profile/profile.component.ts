@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Profile } from 'src/app/store/profile/profile.module';
@@ -19,7 +20,8 @@ export class ProfileComponent implements OnInit {
   level$: Observable<number>;
 
   constructor(
-    private store: Store<fromAppRoot.AppState>
+    private store: Store<fromAppRoot.AppState>,
+    private cookieService: CookieService
   ) { }
 
   ngOnInit(): void {
@@ -32,6 +34,9 @@ export class ProfileComponent implements OnInit {
 
 
     this.store.select('profile').subscribe(state => {
+      console.log('log: ', this.cookieService.get('name'));
+
+
       if (state.profile.name && state.profile.imgUrl) {
         this.profileInfo = {
           name: state.profile.name,
@@ -47,11 +52,17 @@ export class ProfileComponent implements OnInit {
         }
       }
 
+      this.profileInfo.name = this.cookieService.get('name');
+      this.profileInfo.imgUrl = this.cookieService.get('imgUrl');
+
     });
 
     this.level$ = this.store.select('challenge').pipe(
       map(data => data.challenge.level)
-    )
+    );
+
+
+
 
   }
 

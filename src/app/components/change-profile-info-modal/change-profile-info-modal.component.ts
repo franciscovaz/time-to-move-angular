@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { CookieService } from 'ngx-cookie-service';
 
 import * as fromAppRoot from '../../store/app.reducer';
 import * as ProfileActions from '../../store/profile/profile.actions';
@@ -19,7 +20,8 @@ export class ChangeProfileInfoModalComponent implements OnInit {
   user: User;
 
   constructor(
-    private store: Store<fromAppRoot.AppState>
+    private store: Store<fromAppRoot.AppState>,
+    private cookieService: CookieService
   ) { }
 
   ngOnInit(): void {
@@ -29,6 +31,16 @@ export class ChangeProfileInfoModalComponent implements OnInit {
       name: 'Francisco Vaz',
       imgUrl: 'https://github.com/franciscovaz.png'
     }
+
+    if (this.cookieService.get('name')) {
+      this.user.name = this.cookieService.get('name');
+    }
+
+    if (this.cookieService.get('imgUrl')) {
+      this.user.imgUrl = this.cookieService.get('imgUrl');
+    }
+
+
   }
 
   handleCloseProfileModal() {

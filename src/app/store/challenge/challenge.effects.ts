@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { createEffect, Actions, ofType } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
+import { CookieService } from "ngx-cookie-service";
 import { tap, withLatestFrom } from 'rxjs/operators';
 
 import * as fromAppRoot from '../app.reducer';
@@ -18,7 +19,7 @@ export class ChallengeEffects {
 
         // se action.isChallengSuccess dispara uma action para atualizar a store...
         const { amount } = action;
-        const { experienceToNextLevel, currentExperience } = store.challenge;
+        const { experienceToNextLevel, currentExperience, level, challengesCompleted } = store.challenge;
 
         let finalExperience = currentExperience + amount;
 
@@ -29,12 +30,19 @@ export class ChallengeEffects {
         }
         this.store.dispatch(ChallengeActions.setCurrentExperience({ currentExperience: finalExperience }))
 
+
+
+        this.cookieService.set('level', String(level));
+        this.cookieService.set('currentExperience', String(currentExperience));
+        this.cookieService.set('challengesCompleted', String(challengesCompleted));
+
         return store;
       })
     ), { dispatch: false })
 
   constructor(
     private actions$: Actions,
-    private store: Store<fromAppRoot.AppState>
+    private store: Store<fromAppRoot.AppState>,
+    private cookieService: CookieService
   ) { }
 }
