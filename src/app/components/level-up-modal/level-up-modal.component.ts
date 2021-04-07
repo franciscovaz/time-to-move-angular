@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import * as frommAppRoot from '../../store/app.reducer';
+import * as fromAppRoot from '../../store/app.reducer';
 import * as ChallengeActions from '../../store/challenge/challenge.actions';
 
 
@@ -18,7 +18,7 @@ export class LevelUpModalComponent implements OnInit {
   completedChallenges$: Observable<number>;
 
   constructor(
-    private readonly store: Store<frommAppRoot.AppState>
+    private readonly store: Store<fromAppRoot.AppState>
   ) { }
 
   ngOnInit(): void {
