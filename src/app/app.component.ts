@@ -21,7 +21,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.select('challenge').subscribe(data => {
-      console.log('challengesCompleted: ', data.challenge.challengesCompleted);
 
       if (!data.challenge.level) {
         this.cookieService.set('level', String(data.challenge.level));
@@ -39,32 +38,25 @@ export class AppComponent implements OnInit {
 
     this.store.select('profile').subscribe(data => {
 
-      console.log('antes: ', this.cookieService.get('name'));
-
       if (data.profile.name === 'John Doe' && this.cookieService.get('name') === 'John Doe') {
         this.cookieService.set('name', 'John Doe');
       }
-
       if (data.profile.name !== 'John Doe') {
         this.cookieService.set('name', data.profile.name);
       }
-
-
       if (this.cookieService.get('name') !== 'John Doe' && data.profile.name !== 'John Doe') {
         this.cookieService.set('name', data.profile.name);
       }
 
-      console.log('depois: ', this.cookieService.get('name'));
-
-
-
-      if (data.profile.imgUrl === '') {
-        this.cookieService.set('imgUrl', 'https://github.com/franciscovaz.png');
-
-      } else {
+      if (data.profile.imgUrl === 'https://icon2.cleanpng.com/20180405/rge/kisspng-login-google-account-computer-icons-user-activity-5ac6bbe6ad7041.1621164815229736707104.jpg' && this.cookieService.get('imgUrl') === 'https://icon2.cleanpng.com/20180405/rge/kisspng-login-google-account-computer-icons-user-activity-5ac6bbe6ad7041.1621164815229736707104.jpg') {
+        this.cookieService.set('imgUrl', 'https://icon2.cleanpng.com/20180405/rge/kisspng-login-google-account-computer-icons-user-activity-5ac6bbe6ad7041.1621164815229736707104.jpg');
+      }
+      if (data.profile.imgUrl !== 'https://icon2.cleanpng.com/20180405/rge/kisspng-login-google-account-computer-icons-user-activity-5ac6bbe6ad7041.1621164815229736707104.jpg') {
         this.cookieService.set('imgUrl', data.profile.imgUrl);
       }
-
+      if (this.cookieService.get('imgUrl') !== 'https://icon2.cleanpng.com/20180405/rge/kisspng-login-google-account-computer-icons-user-activity-5ac6bbe6ad7041.1621164815229736707104.jpg' && data.profile.imgUrl !== 'https://icon2.cleanpng.com/20180405/rge/kisspng-login-google-account-computer-icons-user-activity-5ac6bbe6ad7041.1621164815229736707104.jpg') {
+        this.cookieService.set('imgUrl', data.profile.imgUrl);
+      }
 
     });
   }
