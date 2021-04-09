@@ -50,3 +50,9 @@
     font-size: 0px; /* hack - quando o botao so tem um icone, tem menos espaco em cima */
   }
 }
+
+@media screen and (max-width: 500px) {
+  .container {
+    width: 90%;
+  }
+}

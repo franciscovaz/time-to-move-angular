@@ -78,3 +78,15 @@
   background: var(--red);
   color: var(--white);
 }
+
+@media screen and (max-width: 924px) {
+  .countdownContainer {
+    & > div {
+      font-size: 6.5rem;
+    }
+
+    & > span {
+      font-size: 4.25rem;
+    }
+  }
+}
