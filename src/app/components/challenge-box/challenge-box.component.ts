@@ -90,9 +90,9 @@ export class ChallengeBoxComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if ('Notification' in window) {
+    /* if ('Notification' in window) {
       Notification.requestPermission();
-    }
+    } */
     // Notification.requestPermission();
 
     this.store.select('countdown').subscribe(data => {

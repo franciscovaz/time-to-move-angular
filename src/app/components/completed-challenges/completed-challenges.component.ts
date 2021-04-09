@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { CookieService } from 'ngx-cookie-service';
+import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import * as frommAppRoot from '../../store/app.reducer';
@@ -13,12 +14,17 @@ import * as frommAppRoot from '../../store/app.reducer';
 export class CompletedChallengesComponent implements OnInit {
 
   completedChallenges$: Observable<number>;
+  // completedChallenges: number;
 
   constructor(
-    private readonly store: Store<frommAppRoot.AppState>
+    private readonly store: Store<frommAppRoot.AppState>,
+    private cookieService: CookieService
   ) { }
 
   ngOnInit(): void {
+
+
+
     this.completedChallenges$ = this.store.select('challenge').pipe(
       map((challenge) => {
         return challenge.challenge.challengesCompleted

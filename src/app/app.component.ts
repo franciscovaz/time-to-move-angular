@@ -20,17 +20,43 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    if ('Notification' in window) {
+      Notification.requestPermission();
+    }
+
     this.store.select('challenge').subscribe(data => {
 
-      if (!data.challenge.level) {
+      if (data.challenge.level === 0 && this.cookieService.get('level') === '0') {
+        this.cookieService.set('level', String(0));
+      }
+      if (data.challenge.level !== 0) {
+        this.cookieService.set('level', String(data.challenge.level));
+      }
+      if (this.cookieService.get('level') !== '0' && data.challenge.level !== 0) {
         this.cookieService.set('level', String(data.challenge.level));
       }
 
-      if (!data.challenge.currentExperience) {
-        this.cookieService.set('currentExperience', String(data.challenge.currentExperience));
-      }
 
+
+      /* if (!data.challenge.currentExperience) {
+        this.cookieService.set('currentExperience', String(data.challenge.currentExperience));
+      } */
+
+
+      // this.cookieService.set('challengesCompleted', String(data.challenge.challengesCompleted));
+
+      /* if (data.challenge.challengesCompleted !== 0) {
+        this.cookieService.set('challengesCompleted', String(data.challenge.challengesCompleted));
+      } */
+
+      if (data.challenge.challengesCompleted === 0 && this.cookieService.get('challengesCompleted') === '0') {
+        this.cookieService.set('challengesCompleted', String(0));
+      }
       if (data.challenge.challengesCompleted !== 0) {
+        this.cookieService.set('challengesCompleted', String(data.challenge.challengesCompleted));
+      }
+      if (this.cookieService.get('challengesCompleted') !== '0' && data.challenge.challengesCompleted !== 0) {
         this.cookieService.set('challengesCompleted', String(data.challenge.challengesCompleted));
       }
 

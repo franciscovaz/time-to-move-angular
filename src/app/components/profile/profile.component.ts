@@ -34,9 +34,6 @@ export class ProfileComponent implements OnInit {
 
 
     this.store.select('profile').subscribe(state => {
-      console.log('log: ', this.cookieService.get('name'));
-
-
       if (state.profile.name && state.profile.imgUrl) {
         this.profileInfo = {
           name: state.profile.name,
