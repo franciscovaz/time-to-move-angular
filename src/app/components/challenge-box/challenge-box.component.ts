@@ -90,6 +90,7 @@ export class ChallengeBoxComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
     /* if ('Notification' in window) {
       Notification.requestPermission();
     } */
@@ -107,13 +108,27 @@ export class ChallengeBoxComponent implements OnInit {
           // guardar challenge na store
           this.store.dispatch(ChallengeActions.storeActiveChallenge({ activeChallenge: this.challenge }))
 
-          new Audio('/assets/notification.mp3').play();
 
-          if (Notification.permission === 'granted') {
-            new Notification('New challenge 🎉', {
+
+          if (!("Notification" in window)) {
+            alert("This browser does not support desktop notification");
+          }
+
+          // Let's check whether notification permissions have already been granted
+          else if (Notification.permission === "granted") {
+            // If it's okay let's create a notification
+
+            new Audio('/assets/notification.mp3').play();
+
+
+            var notification = new Notification('New challenge 🎉', {
               body: `Worth ${this.challenge.amount}xp!`
             })
+
           }
+
+
+
         }
       }
 
