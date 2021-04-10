@@ -91,11 +91,6 @@ export class ChallengeBoxComponent implements OnInit {
 
   ngOnInit(): void {
 
-    /* if ('Notification' in window) {
-      Notification.requestPermission();
-    } */
-    // Notification.requestPermission();
-
     this.store.select('countdown').subscribe(data => {
       this.hasFinished = data.countdown.hasFinished;
       this.isActive = data.countdown.isActive;
@@ -108,33 +103,20 @@ export class ChallengeBoxComponent implements OnInit {
           // guardar challenge na store
           this.store.dispatch(ChallengeActions.storeActiveChallenge({ activeChallenge: this.challenge }))
 
-
-
           if (!("Notification" in window)) {
-            // alert("This browser does not support desktop notification");
-            // continue;
+            console.log('Notification does not work on mobile!');
             return;
           }
-
-          // Let's check whether notification permissions have already been granted
           else if (Notification.permission === "granted") {
-            // If it's okay let's create a notification
 
             new Audio('/assets/notification.mp3').play();
 
-
-            var notification = new Notification('New challenge 🎉', {
+            new Notification('New challenge 🎉', {
               body: `Worth ${this.challenge.amount}xp!`
             })
-
           }
-
-
-
         }
       }
-
-
     })
 
     this.store.select('challenge').subscribe(data => {
@@ -145,7 +127,6 @@ export class ChallengeBoxComponent implements OnInit {
   }
 
   handleFailedChallenge() {
-    console.log('challenge failed');
     this.store.dispatch(ChallengeActions.isChallengeSucceeded({ challengeResponse: false, amount: 0 }));
     this.challenge = null;
   }
@@ -154,10 +135,5 @@ export class ChallengeBoxComponent implements OnInit {
     console.log('challenge succeeded, amount: ', this.challenge.amount);
     this.store.dispatch(ChallengeActions.isChallengeSucceeded({ challengeResponse: true, amount: this.challenge.amount }))
     this.challenge = null;
-    // get xp and sum to current xp on store
-
-    // console.log('current: ', this.currentXp);
-
   }
-
 }

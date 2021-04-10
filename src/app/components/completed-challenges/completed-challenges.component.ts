@@ -14,7 +14,6 @@ import * as frommAppRoot from '../../store/app.reducer';
 export class CompletedChallengesComponent implements OnInit {
 
   completedChallenges$: Observable<number>;
-  // completedChallenges: number;
 
   constructor(
     private readonly store: Store<frommAppRoot.AppState>,
@@ -22,9 +21,6 @@ export class CompletedChallengesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
-
-
     this.completedChallenges$ = this.store.select('challenge').pipe(
       map((challenge) => {
         return challenge.challenge.challengesCompleted
