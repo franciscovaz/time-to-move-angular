@@ -25,7 +25,6 @@ export class ChangeProfileInfoModalComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.store.dispatch(ProfileActions.getProfile());
 
     this.user = {
       name: 'Francisco Vaz',
@@ -39,8 +38,6 @@ export class ChangeProfileInfoModalComponent implements OnInit {
     if (this.cookieService.get('imgUrl')) {
       this.user.imgUrl = this.cookieService.get('imgUrl');
     }
-
-
   }
 
   handleCloseProfileModal() {
@@ -53,7 +50,6 @@ export class ChangeProfileInfoModalComponent implements OnInit {
 
   handleDiscardChanges() {
     console.log('Discard changes');
-    // for now, just close it!
   }
 
 }

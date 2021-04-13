@@ -100,7 +100,6 @@ export class ChallengeBoxComponent implements OnInit {
           this.randomChallengeIndex = Math.floor(Math.random() * challenges.length);
           this.challenge = challenges[this.randomChallengeIndex];
 
-          // guardar challenge na store
           this.store.dispatch(ChallengeActions.storeActiveChallenge({ activeChallenge: this.challenge }))
 
           if (!("Notification" in window)) {
