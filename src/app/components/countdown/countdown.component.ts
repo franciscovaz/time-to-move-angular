@@ -55,7 +55,6 @@ export class CountdownComponent implements OnInit {
 
       this.secondLeft = String(this.seconds).padStart(2, '0').split('')[0];
       this.secondRight = String(this.seconds).padStart(2, '0').split('')[1];
-      // console.log('countdown: ', data);
 
       // hasFinished
       this.hasFinished = data.countdown.hasFinished;
@@ -124,12 +123,9 @@ export class CountdownComponent implements OnInit {
 
   resetCountdown() {
     this.firstSub.unsubscribe();
-    // this.isActive = false;
-    // this.hasFinished = false;
     this.store.dispatch(CountdownActions.countdownHasFinished({ hasFinished: false }))
     this.store.dispatch(CountdownActions.countdownIsActive({ isActive: false }))
 
-    console.log(this.storedTime);
     this.store.dispatch(CountdownActions.resetCountdown({ countdownTime: this.storedTime }))
     //this.store.dispatch(CountdownActions.updateCountdownTime({ countdownTime: this.storedTime }))
   }
