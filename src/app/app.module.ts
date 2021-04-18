@@ -22,6 +22,8 @@ import { LevelUpModalComponent } from './components/level-up-modal/level-up-moda
 import { LoginComponent } from './components/login/login.component';
 import { AfterLoginToFixComponent } from './components/after-login-to-fix/after-login-to-fix.component';
 
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +44,8 @@ import { AfterLoginToFixComponent } from './components/after-login-to-fix/after-
     StoreModule.forRoot(fromAppRoot.appReducer),
     EffectsModule.forRoot([ChallengeEffects]),
     StoreDevtoolsModule.instrument({ logOnly: environment.production }),
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
