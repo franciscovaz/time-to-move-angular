@@ -5,7 +5,7 @@
     <form #loginForm="ngForm" (ngSubmit)="handleSubmit()">
       <h1>Login</h1>
 
-      <input type="text" name="email" id="email" [(ngModel)]="user.email" #email="ngModel">
+      <input type="text" placeholder="Your email" name="email" id="email" [(ngModel)]="user.email" #email="ngModel">
 
 
       <button class="button" type="submit">
