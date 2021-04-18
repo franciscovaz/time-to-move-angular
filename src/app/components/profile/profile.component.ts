@@ -21,7 +21,6 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private store: Store<fromAppRoot.AppState>,
-    private cookieService: CookieService
   ) { }
 
   ngOnInit(): void {
@@ -34,6 +33,8 @@ export class ProfileComponent implements OnInit {
 
 
     this.store.select('profile').subscribe(state => {
+      console.log('Profile name: ', state);
+
       if (state.profile.name && state.profile.imgUrl) {
         this.profileInfo = {
           name: state.profile.name,
@@ -49,8 +50,6 @@ export class ProfileComponent implements OnInit {
         }
       }
 
-      this.profileInfo.name = this.cookieService.get('name');
-      this.profileInfo.imgUrl = this.cookieService.get('imgUrl');
 
     });
 

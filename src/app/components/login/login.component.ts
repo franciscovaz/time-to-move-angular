@@ -1,6 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { map } from 'rxjs/operators';
+
+import * as fromAppRoot from '../../store/app.reducer';
+import * as ProfileActions from '../../store/profile/profile.actions';
+import * as ChallengeActions from '../../store/challenge/challenge.actions';
+import * as CountdownActions from '../../store/countdown/countdown.actions';
 
 interface User {
   email: '';
@@ -9,6 +16,7 @@ interface User {
   challengesCompleted: number;
   currentExperience: number;
   level: number;
+  experienceToNextLevel: number;
 }
 @Component({
   selector: 'app-login',
@@ -17,9 +25,13 @@ interface User {
 })
 export class LoginComponent implements OnInit {
   user: User;
-  usersFromApi = [];
+  usersFromApi: User[] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private store: Store<fromAppRoot.AppState>,
+  ) { }
 
   ngOnInit(): void {
     this.user = {
@@ -29,6 +41,7 @@ export class LoginComponent implements OnInit {
       challengesCompleted: 0,
       currentExperience: 0,
       level: 0,
+      experienceToNextLevel: 0
     }
 
     this.fetchUsers();
@@ -37,13 +50,42 @@ export class LoginComponent implements OnInit {
   handleSubmit(): void {
     console.log('email: ', this.user.email);
     console.log('userFromApi: ', this.usersFromApi);
+    localStorage.setItem('email', this.user.email);
 
+    // TODO mudar esta approach
     if (this.usersFromApi.filter(user => user.email === this.user.email).length > 0) {
       // ja existe este email, vamos redirecionar e atualizar a store com a info do user
+
+      for (var i = 0; i < this.usersFromApi.length; i++) {
+        if (this.usersFromApi[i].email === this.user.email) {
+          console.log('existe: ', this.usersFromApi[i]);
+          // Profile
+          this.store.dispatch(ProfileActions.updateProfile({ name: this.usersFromApi[i].name, imgUrl: this.usersFromApi[i].imgUrl }));
+          // Challenge
+          this.store.dispatch(ChallengeActions.setLevel({ level: this.usersFromApi[i].level }))
+          this.store.dispatch(ChallengeActions.setCurrentExperience({ currentExperience: this.usersFromApi[i].currentExperience }))
+          this.store.dispatch(ChallengeActions.setCompletedChallenges({ completedChallenges: this.usersFromApi[i].challengesCompleted }))
+          this.store.dispatch(ChallengeActions.setExperienceToNextLevel({ experienceToNextLevel: this.usersFromApi[i].experienceToNextLevel }))
+        }
+      }
+
+
+      this.router.navigate(['/time']);
     } else {
       // user nao existe, vamos criar
-      this.http.post('https://time-to-move-14d11-default-rtdb.firebaseio.com/users.json', { ...this.user, email: this.user.email }).subscribe(resp => {
+      this.http.post('https://time-to-move-14d11-default-rtdb.firebaseio.com/users.json', { ...this.user, email: this.user.email, name: 'John Doe' }).subscribe(resp => {
         console.log('response: ', resp);
+
+        // Profile
+        this.store.dispatch(ProfileActions.updateProfile({ name: 'John Doe', imgUrl: 'http://achieveplusdrivingschool.com.au/wp-content/themes/customizeTheme/img/reviewlogo.png' }));
+        // Challenge
+        this.store.dispatch(ChallengeActions.setLevel({ level: 1 }))
+        this.store.dispatch(ChallengeActions.setCurrentExperience({ currentExperience: 0 }))
+        this.store.dispatch(ChallengeActions.setCompletedChallenges({ completedChallenges: 0 }))
+        this.store.dispatch(ChallengeActions.setExperienceToNextLevel({ experienceToNextLevel: 64 }))
+
+
+        this.router.navigate(['/time']);
       })
     }
 
