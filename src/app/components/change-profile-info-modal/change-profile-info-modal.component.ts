@@ -48,8 +48,8 @@ export class ChangeProfileInfoModalComponent implements OnInit {
 
   handleUpdateUserInfo() {
     this.store.dispatch(ProfileActions.updateProfile({ name: this.user.name, imgUrl: this.user.imgUrl }));
-
-    this.http.patch(`https://time-to-move-14d11-default-rtdb.firebaseio.com/users/${localStorage.getItem('user_id')}`, { name: this.user.name, imgUrl: this.user.imgUrl }).subscribe(resp => {
+    const headers = { 'Access-Control-Allow-Origin': '*' };
+    this.http.patch(`https://time-to-move-14d11-default-rtdb.firebaseio.com/users/${localStorage.getItem('user_id')}`, { name: this.user.name, imgUrl: this.user.imgUrl }, { headers }).subscribe(resp => {
       console.log('update resp: ', resp);
 
     })
