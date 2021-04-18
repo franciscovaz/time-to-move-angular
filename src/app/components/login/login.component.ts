@@ -10,6 +10,7 @@ import * as ChallengeActions from '../../store/challenge/challenge.actions';
 import * as CountdownActions from '../../store/countdown/countdown.actions';
 
 interface User {
+  id: string;
   email: '';
   name: string;
   imgUrl: string;
@@ -35,6 +36,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = {
+      id: '',
       email: '',
       name: '',
       imgUrl: '',
@@ -51,6 +53,7 @@ export class LoginComponent implements OnInit {
     console.log('email: ', this.user.email);
     console.log('userFromApi: ', this.usersFromApi);
     localStorage.setItem('email', this.user.email);
+    //TODO setar id mingo na store para osterior update!!!
 
     // TODO mudar esta approach
     if (this.usersFromApi.filter(user => user.email === this.user.email).length > 0) {
@@ -59,13 +62,14 @@ export class LoginComponent implements OnInit {
       for (var i = 0; i < this.usersFromApi.length; i++) {
         if (this.usersFromApi[i].email === this.user.email) {
           console.log('existe: ', this.usersFromApi[i]);
+          localStorage.setItem('user_id', this.usersFromApi[i].id);
           // Profile
           this.store.dispatch(ProfileActions.updateProfile({ name: this.usersFromApi[i].name, imgUrl: this.usersFromApi[i].imgUrl }));
           // Challenge
-          this.store.dispatch(ChallengeActions.setLevel({ level: this.usersFromApi[i].level }))
-          this.store.dispatch(ChallengeActions.setCurrentExperience({ currentExperience: this.usersFromApi[i].currentExperience }))
-          this.store.dispatch(ChallengeActions.setCompletedChallenges({ completedChallenges: this.usersFromApi[i].challengesCompleted }))
-          this.store.dispatch(ChallengeActions.setExperienceToNextLevel({ experienceToNextLevel: this.usersFromApi[i].experienceToNextLevel }))
+          this.store.dispatch(ChallengeActions.setLevel({ level: this.usersFromApi[i].level }));
+          this.store.dispatch(ChallengeActions.setCurrentExperience({ currentExperience: this.usersFromApi[i].currentExperience }));
+          this.store.dispatch(ChallengeActions.setCompletedChallenges({ completedChallenges: this.usersFromApi[i].challengesCompleted }));
+          this.store.dispatch(ChallengeActions.setExperienceToNextLevel({ experienceToNextLevel: this.usersFromApi[i].experienceToNextLevel }));
         }
       }
 
@@ -73,9 +77,9 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/time']);
     } else {
       // user nao existe, vamos criar
-      this.http.post('https://time-to-move-14d11-default-rtdb.firebaseio.com/users.json', { ...this.user, email: this.user.email, name: 'John Doe' }).subscribe(resp => {
+      this.http.post('https://time-to-move-14d11-default-rtdb.firebaseio.com/users.json', { ...this.user, email: this.user.email, name: 'John Doe' }).subscribe((resp: { name: string }) => {
         console.log('response: ', resp);
-
+        localStorage.setItem('user_id', resp.name);
         // Profile
         this.store.dispatch(ProfileActions.updateProfile({ name: 'John Doe', imgUrl: 'http://achieveplusdrivingschool.com.au/wp-content/themes/customizeTheme/img/reviewlogo.png' }));
         // Challenge
