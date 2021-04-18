@@ -15,6 +15,24 @@ export const setCurrentExperience = createAction(
     currentExperience: number,
   }>()
 )
+export const setLevel = createAction(
+  '[Challenge] Set level',
+  props<{
+    level: number,
+  }>()
+)
+export const setCompletedChallenges = createAction(
+  '[Challenge] Set completed challenges',
+  props<{
+    completedChallenges: number,
+  }>()
+)
+export const setExperienceToNextLevel = createAction(
+  '[Challenge] Set experience to next level',
+  props<{
+    experienceToNextLevel: number,
+  }>()
+)
 
 export const levelUp = createAction(
   '[Challenge] Level up',

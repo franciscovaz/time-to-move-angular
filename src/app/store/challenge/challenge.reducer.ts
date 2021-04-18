@@ -64,6 +64,36 @@ const _challengeReducer = createReducer(
     })
   ),
   on(
+    ChallengeActions.setLevel,
+    (state, action) => ({
+      ...state,
+      challenge: {
+        ...state.challenge,
+        level: action.level
+      }
+    })
+  ),
+  on(
+    ChallengeActions.setCompletedChallenges,
+    (state, action) => ({
+      ...state,
+      challenge: {
+        ...state.challenge,
+        challengesCompleted: action.completedChallenges
+      }
+    })
+  ),
+  on(
+    ChallengeActions.setExperienceToNextLevel,
+    (state, action) => ({
+      ...state,
+      challenge: {
+        ...state.challenge,
+        experienceToNextLevel: action.experienceToNextLevel,
+      }
+    })
+  ),
+  on(
     ChallengeActions.levelUp,
     (state, action) => ({
       ...state,
