@@ -1,0 +1,37 @@
+.container {
+  height: 100vh;
+  max-width: 992px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem;
+
+  display: flex;
+  flex-direction: column;
+
+  section {
+    flex: 1;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6.25rem; /* 6.25 * 16 100px para cada coluna no mobile */
+    align-content: center;
+  }
+}
+
+@media screen and (max-width: 765px) {
+  .container {
+    section {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr;
+
+      gap: 4.25rem; /* 6.25 * 16 100px para cada coluna no mobile */
+    }
+  }
+}
+@media screen and (max-width: 888px) {
+  .container {
+    section {
+      gap: 2.25rem; /* 6.25 * 16 100px para cada coluna no mobile */
+    }
+  }
+}

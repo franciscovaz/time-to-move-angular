@@ -19,6 +19,8 @@ import { ChangeCountdownTimeModalComponent } from './components/change-countdown
 import { EffectsModule } from '@ngrx/effects';
 import { ChallengeEffects } from './store/challenge/challenge.effects';
 import { LevelUpModalComponent } from './components/level-up-modal/level-up-modal.component';
+import { LoginComponent } from './components/login/login.component';
+import { AfterLoginToFixComponent } from './components/after-login-to-fix/after-login-to-fix.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { LevelUpModalComponent } from './components/level-up-modal/level-up-moda
     ChallengeBoxComponent,
     ChangeProfileInfoModalComponent,
     ChangeCountdownTimeModalComponent,
-    LevelUpModalComponent
+    LevelUpModalComponent,
+    LoginComponent,
+    AfterLoginToFixComponent
   ],
   imports: [
     BrowserModule,
