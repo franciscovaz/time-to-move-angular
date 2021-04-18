@@ -1,4 +1,17 @@
-<div class="container">
-  <p>Isto login</p>
-  <input type="email" placeholder="Insert your email">
+<div class="login-container">
+  <section class="form-section">
+    <!-- <img src={logoImg} alt="Be The Hero" /> -->
+
+    <form #loginForm="ngForm" (ngSubmit)="handleSubmit()">
+      <h1>Login</h1>
+
+      <input type="text" name="email" id="email" [(ngModel)]="user.email" #email="ngModel">
+
+
+      <button class="button" type="submit">
+        Go!
+      </button>
+
+    </form>
+  </section>
 </div>
