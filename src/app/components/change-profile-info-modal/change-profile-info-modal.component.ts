@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { CookieService } from 'ngx-cookie-service';
@@ -21,7 +22,8 @@ export class ChangeProfileInfoModalComponent implements OnInit {
 
   constructor(
     private store: Store<fromAppRoot.AppState>,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private http: HttpClient
   ) { }
 
   ngOnInit(): void {
@@ -45,7 +47,12 @@ export class ChangeProfileInfoModalComponent implements OnInit {
   }
 
   handleUpdateUserInfo() {
-    this.store.dispatch(ProfileActions.updateProfile({ name: this.user.name, imgUrl: this.user.imgUrl }))
+    this.store.dispatch(ProfileActions.updateProfile({ name: this.user.name, imgUrl: this.user.imgUrl }));
+
+    this.http.patch(`https://time-to-move-14d11-default-rtdb.firebaseio.com/users/${localStorage.getItem('user_id')}`, { name: this.user.name, imgUrl: this.user.imgUrl }).subscribe(resp => {
+      console.log('update resp: ', resp);
+
+    })
   }
 
   handleDiscardChanges() {
