@@ -31,7 +31,7 @@ export class ChallengeEffects {
         this.store.dispatch(ChallengeActions.setCurrentExperience({ currentExperience: finalExperience }));
 
 
-        this.http.patch(`https://time-to-move-14d11-default-rtdb.firebaseio.com/users/${localStorage.getItem('user_id')}.json`, { level: level, currentExperience: challengesCompleted, challengesCompleted: challengesCompleted }).subscribe(resp => {
+        this.http.patch(`https://time-to-move-14d11-default-rtdb.firebaseio.com/users/${localStorage.getItem('user_id')}.json`, { level: level + 1, currentExperience: finalExperience, challengesCompleted: challengesCompleted }).subscribe(resp => {
           console.log('update resp: ', resp);
 
         });

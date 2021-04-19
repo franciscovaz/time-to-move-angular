@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -16,45 +17,67 @@ export class ProfileComponent implements OnInit {
 
   isProfileChangeModalOpen = false;
   profileInfo: Profile;
-  level$: Observable<number>;
+  //level$: Observable<number>;
+  level: number;
 
   constructor(
     private store: Store<fromAppRoot.AppState>,
+    private http: HttpClient
   ) { }
 
   ngOnInit(): void {
 
     this.profileInfo = {
-      name: 'John Doe',
-      imgUrl: 'https://github.com/franciscovaz.png',
+      name: '',
+      imgUrl: '',
       isProfileChangeModalOpen: false
     }
+
+
+    this.http.get('https://time-to-move-14d11-default-rtdb.firebaseio.com/users.json').pipe(
+      map(respData => {
+        let userInfo;
+        for (const key in respData) {
+          // console.log('key: ', respData[key]);
+          if (respData[key].email === localStorage.getItem('email')) {
+            return respData[key];
+          } else {
+            userInfo = {
+              name: 'John Doe',
+              imgUrl: 'https://github.com/franciscovaz.png',
+              isProfileChangeModalOpen: false
+            }
+          }
+
+        }
+        return userInfo;
+      })).subscribe(user => {
+        console.log('users: ', user);
+        this.profileInfo = user;
+        this.level = user.level;
+      })
+
+
 
 
     this.store.select('profile').subscribe(state => {
       console.log('Profile name: ', state);
 
-      if (state.profile.name && state.profile.imgUrl) {
-        this.profileInfo = {
-          name: state.profile.name,
-          imgUrl: state.profile.imgUrl,
-          isProfileChangeModalOpen: state.profile.isProfileChangeModalOpen
-        }
-      }
-      if (state.profile.isProfileChangeModalOpen || state.profile.isProfileChangeModalOpen === false) {
-        this.profileInfo = {
-          name: state.profile.name,
-          imgUrl: state.profile.imgUrl,
-          isProfileChangeModalOpen: state.profile.isProfileChangeModalOpen
-        }
-      }
-
+      this.profileInfo.isProfileChangeModalOpen = state.profile.isProfileChangeModalOpen
+      this.profileInfo.name = state.profile.name
+      this.profileInfo.imgUrl = state.profile.imgUrl
 
     });
 
-    this.level$ = this.store.select('challenge').pipe(
+    this.store.select('challenge').subscribe(state => {
+
+      this.level = state.challenge.level;
+
+    });
+
+    /* this.level$ = this.store.select('challenge').pipe(
       map(data => data.challenge.level)
-    );
+    ); */
 
 
 

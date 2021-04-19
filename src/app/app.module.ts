@@ -23,6 +23,7 @@ import { LoginComponent } from './components/login/login.component';
 import { AfterLoginToFixComponent } from './components/after-login-to-fix/after-login-to-fix.component';
 
 import { HttpClientModule } from '@angular/common/http';
+import { ProfileEffects } from './store/profile/profile.effects';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     StoreModule.forRoot(fromAppRoot.appReducer),
-    EffectsModule.forRoot([ChallengeEffects]),
+    EffectsModule.forRoot([ChallengeEffects, ProfileEffects]),
     StoreDevtoolsModule.instrument({ logOnly: environment.production }),
     FormsModule,
     HttpClientModule
