@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Profile } from 'src/app/store/profile/profile.module';

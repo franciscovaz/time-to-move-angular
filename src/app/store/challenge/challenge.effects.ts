@@ -1,7 +1,7 @@
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { createEffect, Actions, ofType } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
-import { CookieService } from "ngx-cookie-service";
 import { tap, withLatestFrom } from 'rxjs/operators';
 
 import * as fromAppRoot from '../app.reducer';
@@ -26,15 +26,15 @@ export class ChallengeEffects {
         if (finalExperience >= experienceToNextLevel) {
           finalExperience = finalExperience - experienceToNextLevel;
           this.store.dispatch(ChallengeActions.levelUp());
-          this.store.dispatch(ChallengeActions.isLevelUpModalOpen({ isLevelUpModalOpen: true }))
+          this.store.dispatch(ChallengeActions.isLevelUpModalOpen({ isLevelUpModalOpen: true }));
         }
-        this.store.dispatch(ChallengeActions.setCurrentExperience({ currentExperience: finalExperience }))
+        this.store.dispatch(ChallengeActions.setCurrentExperience({ currentExperience: finalExperience }));
 
 
+        this.http.patch(`https://time-to-move-14d11-default-rtdb.firebaseio.com/users/${localStorage.getItem('user_id')}.json`, { level: level, currentExperience: challengesCompleted, challengesCompleted: challengesCompleted }).subscribe(resp => {
+          console.log('update resp: ', resp);
 
-        this.cookieService.set('level', String(level));
-        this.cookieService.set('currentExperience', String(currentExperience));
-        this.cookieService.set('challengesCompleted', String(challengesCompleted));
+        });
 
         return store;
       })
@@ -43,6 +43,6 @@ export class ChallengeEffects {
   constructor(
     private actions$: Actions,
     private store: Store<fromAppRoot.AppState>,
-    private cookieService: CookieService
+    private http: HttpClient
   ) { }
 }
