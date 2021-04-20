@@ -47,6 +47,10 @@ export class LoginComponent implements OnInit {
     }
 
     this.fetchUsers();
+
+    if (localStorage.getItem('email')) {
+      this.router.navigate(['/time']);
+    }
   }
 
   handleSubmit(): void {
