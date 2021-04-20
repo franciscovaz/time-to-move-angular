@@ -56,10 +56,20 @@ export class CountdownComponent implements OnInit {
       this.secondLeft = String(this.seconds).padStart(2, '0').split('')[0];
       this.secondRight = String(this.seconds).padStart(2, '0').split('')[1];
 
+      console.log('minutes: ', this.minutes);
+      console.log('seconds: ', this.seconds);
+
+
+
+
       // hasFinished
       this.hasFinished = data.countdown.hasFinished;
       // isActive
       this.isActive = data.countdown.isActive;
+
+      if (this.minutes === 0 && this.seconds === 0) {
+        this.hasFinished = true;
+      }
     });
 
     this.store.select('challenge').subscribe(data => {
