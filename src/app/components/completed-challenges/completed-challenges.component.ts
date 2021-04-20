@@ -41,15 +41,12 @@ export class CompletedChallengesComponent implements OnInit {
         }
         return userInfo;
       })).subscribe(user => {
-        console.log('users 2: ', user);
         this.store.dispatch(ChallengeActions.setCompletedChallenges({ completedChallenges: user.challengesCompleted }))
         this.completedChallenges = user.challengesCompleted;
       });
 
 
     this.store.select('challenge').subscribe(data => {
-      console.log('foste');
-
       this.completedChallenges = data.challenge.challengesCompleted;
     })
   }

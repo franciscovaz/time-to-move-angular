@@ -39,7 +39,6 @@ export class ProfileComponent implements OnInit {
       map(respData => {
         let userInfo;
         for (const key in respData) {
-          // console.log('key: ', respData[key]);
           if (respData[key].email === localStorage.getItem('email')) {
             return respData[key];
           } else {
@@ -53,42 +52,30 @@ export class ProfileComponent implements OnInit {
         }
         return userInfo;
       })).subscribe(user => {
-        console.log('users: ', user);
         this.profileInfo = user;
         this.level = user.level;
 
         this.store.dispatch(ProfileActions.updateProfile({ name: user.name, imgUrl: user.imgUrl }));
         // Challenge
         this.store.dispatch(ChallengeActions.setLevel({ level: user.level }));
-
-
       });
 
 
 
 
     this.store.select('profile').subscribe(state => {
-      console.log('Profile name: ', state);
-
-      this.profileInfo.isProfileChangeModalOpen = state.profile.isProfileChangeModalOpen
-      this.profileInfo.name = state.profile.name
-      this.profileInfo.imgUrl = state.profile.imgUrl
-
+      this.profileInfo.isProfileChangeModalOpen = state.profile.isProfileChangeModalOpen;
+      this.profileInfo.name = state.profile.name;
+      this.profileInfo.imgUrl = state.profile.imgUrl;
     });
 
     this.store.select('challenge').subscribe(state => {
-
       this.level = state.challenge.level;
-
     });
 
     /* this.level$ = this.store.select('challenge').pipe(
       map(data => data.challenge.level)
     ); */
-
-
-
-
   }
 
   handleChangeUser() {

@@ -35,7 +35,6 @@ export class ExperienceBarComponent implements OnInit {
         }
         return userInfo;
       })).subscribe(user => {
-        //console.log('users 2: ', user);
         this.experienceToNextLevel = user.experienceToNextLevel;
         this.currentExperience = user.currentExperience;
         this.percentToNextLevel = Math.round((this.currentExperience * 100)) / user.experienceToNextLevel;
@@ -48,8 +47,6 @@ export class ExperienceBarComponent implements OnInit {
 
 
     this.store.select('challenge').subscribe(data => {
-      // console.log('foste');
-
       this.experienceToNextLevel = data.challenge.experienceToNextLevel;
       this.currentExperience = data.challenge.currentExperience;
       this.percentToNextLevel = Math.round((this.currentExperience * 100)) / this.experienceToNextLevel;

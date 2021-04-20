@@ -50,8 +50,6 @@ export class LoginComponent implements OnInit {
   }
 
   handleSubmit(): void {
-    console.log('email: ', this.user.email);
-    console.log('userFromApi: ', this.usersFromApi);
     localStorage.setItem('email', this.user.email);
     //TODO setar id mingo na store para osterior update!!!
 
@@ -67,8 +65,6 @@ export class LoginComponent implements OnInit {
           // Challenge
           this.store.dispatch(ChallengeActions.setLevel({ level: this.usersFromApi[i].level }));
           this.store.dispatch(ChallengeActions.setCurrentExperience({ currentExperience: this.usersFromApi[i].currentExperience }));
-
-          console.log('complete: ', this.usersFromApi[i].challengesCompleted);
 
           this.store.dispatch(ChallengeActions.setCompletedChallenges({ completedChallenges: this.usersFromApi[i].challengesCompleted }));
           this.store.dispatch(ChallengeActions.setExperienceToNextLevel({ experienceToNextLevel: this.usersFromApi[i].experienceToNextLevel }));
@@ -90,7 +86,6 @@ export class LoginComponent implements OnInit {
         this.store.dispatch(ChallengeActions.setCurrentExperience({ currentExperience: 0 }))
         this.store.dispatch(ChallengeActions.setCompletedChallenges({ completedChallenges: 0 }))
         this.store.dispatch(ChallengeActions.setExperienceToNextLevel({ experienceToNextLevel: 64 }))
-
 
         this.router.navigate(['/time']);
       })
