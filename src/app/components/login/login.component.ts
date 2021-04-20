@@ -61,7 +61,6 @@ export class LoginComponent implements OnInit {
 
       for (var i = 0; i < this.usersFromApi.length; i++) {
         if (this.usersFromApi[i].email === this.user.email) {
-          console.log('existe: ', this.usersFromApi[i]);
           localStorage.setItem('user_id', this.usersFromApi[i].id);
           // Profile
           this.store.dispatch(ProfileActions.updateProfile({ name: this.usersFromApi[i].name, imgUrl: this.usersFromApi[i].imgUrl }));
@@ -78,7 +77,6 @@ export class LoginComponent implements OnInit {
     } else {
       // user nao existe, vamos criar
       this.http.post('https://time-to-move-14d11-default-rtdb.firebaseio.com/users.json', { ...this.user, email: this.user.email, name: 'John Doe' }).subscribe((resp: { name: string }) => {
-        console.log('response: ', resp);
         localStorage.setItem('user_id', resp.name);
         // Profile
         this.store.dispatch(ProfileActions.updateProfile({ name: 'John Doe', imgUrl: 'http://achieveplusdrivingschool.com.au/wp-content/themes/customizeTheme/img/reviewlogo.png' }));
@@ -107,7 +105,6 @@ export class LoginComponent implements OnInit {
         }
         return usersArray;
       })).subscribe(users => {
-        // console.log('users: ', users);
         this.usersFromApi = users;
       })
   }

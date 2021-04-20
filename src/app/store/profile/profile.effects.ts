@@ -16,11 +16,8 @@ export class ProfileEffects {
       withLatestFrom(this.store.select('profile')),
       tap(([action, store]) => {
 
-
         // se action.isChallengSuccess dispara uma action para atualizar a store...
         const { imgUrl, name } = action;
-
-
 
         this.http.patch(`https://time-to-move-14d11-default-rtdb.firebaseio.com/users/${localStorage.getItem('user_id')}.json`, { imgUrl: imgUrl, name: name }).subscribe(resp => {
           console.log('update resp: ', resp);
@@ -28,7 +25,7 @@ export class ProfileEffects {
 
         return store;
       })
-    ), { dispatch: false })
+    ), { dispatch: false });
 
   constructor(
     private actions$: Actions,
