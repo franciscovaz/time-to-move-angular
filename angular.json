@@ -26,7 +26,6 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/.htaccess",
               {
                 "glob": "_redirects",
                 "input": "src",
