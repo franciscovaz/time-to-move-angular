@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
     // TODO mudar esta approach
     if (this.usersFromApi.filter(user => user.email === this.user.email).length > 0) {
       // ja existe este email, vamos redirecionar e atualizar a store com a info do user
-
+      console.log('user existe!');
       for (var i = 0; i < this.usersFromApi.length; i++) {
         if (this.usersFromApi[i].email === this.user.email) {
           localStorage.setItem('user_id', this.usersFromApi[i].id);
@@ -67,6 +67,9 @@ export class LoginComponent implements OnInit {
           // Challenge
           this.store.dispatch(ChallengeActions.setLevel({ level: this.usersFromApi[i].level }));
           this.store.dispatch(ChallengeActions.setCurrentExperience({ currentExperience: this.usersFromApi[i].currentExperience }));
+
+          console.log('complete: ', this.usersFromApi[i].challengesCompleted);
+
           this.store.dispatch(ChallengeActions.setCompletedChallenges({ completedChallenges: this.usersFromApi[i].challengesCompleted }));
           this.store.dispatch(ChallengeActions.setExperienceToNextLevel({ experienceToNextLevel: this.usersFromApi[i].experienceToNextLevel }));
         }
@@ -75,6 +78,8 @@ export class LoginComponent implements OnInit {
 
       this.router.navigate(['/time']);
     } else {
+      console.log('user nao existe!');
+
       // user nao existe, vamos criar
       this.http.post('https://time-to-move-14d11-default-rtdb.firebaseio.com/users.json', { ...this.user, email: this.user.email, name: 'John Doe' }).subscribe((resp: { name: string }) => {
         localStorage.setItem('user_id', resp.name);

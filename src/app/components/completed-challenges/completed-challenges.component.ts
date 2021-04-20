@@ -1,7 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
+
+import * as ChallengeActions from '../../store/challenge/challenge.actions';
 
 import * as frommAppRoot from '../../store/app.reducer';
 
@@ -12,18 +14,47 @@ import * as frommAppRoot from '../../store/app.reducer';
 })
 export class CompletedChallengesComponent implements OnInit {
 
-  completedChallenges$: Observable<number>;
+  // completedChallenges$: Observable<number>;
+  completedChallenges: number;
 
   constructor(
-    private readonly store: Store<frommAppRoot.AppState>
+    private readonly store: Store<frommAppRoot.AppState>,
+    private http: HttpClient
   ) { }
 
   ngOnInit(): void {
-    this.completedChallenges$ = this.store.select('challenge').pipe(
+    /* this.completedChallenges$ = this.store.select('challenge').pipe(
       map((challenge) => {
         return challenge.challenge.challengesCompleted
       })
-    )
+    ); */
+
+
+
+    this.http.get('https://time-to-move-14d11-default-rtdb.firebaseio.com/users.json').pipe(
+      map(respData => {
+        let userInfo;
+        for (const key in respData) {
+          if (respData[key].email === localStorage.getItem('email')) {
+            return respData[key];
+          }
+        }
+        return userInfo;
+      })).subscribe(user => {
+        console.log('users 2: ', user);
+        this.store.dispatch(ChallengeActions.setCompletedChallenges({ completedChallenges: user.challengesCompleted }))
+        this.completedChallenges = user.challengesCompleted;
+      });
+
+
+    this.store.select('challenge').subscribe(data => {
+      console.log('foste');
+
+      this.completedChallenges = data.challenge.challengesCompleted;
+    })
   }
+
+
+
 
 }

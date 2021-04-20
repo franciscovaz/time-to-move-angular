@@ -4,6 +4,8 @@ import { Store } from '@ngrx/store';
 import { map } from 'rxjs/operators';
 import * as fromAppRoot from '../../store/app.reducer';
 
+import * as ChallengeActions from '../../store/challenge/challenge.actions';
+
 @Component({
   selector: 'app-experience-bar',
   templateUrl: './experience-bar.component.html',
@@ -33,16 +35,21 @@ export class ExperienceBarComponent implements OnInit {
         }
         return userInfo;
       })).subscribe(user => {
-        console.log('users 2: ', user);
+        //console.log('users 2: ', user);
         this.experienceToNextLevel = user.experienceToNextLevel;
         this.currentExperience = user.currentExperience;
         this.percentToNextLevel = Math.round((this.currentExperience * 100)) / user.experienceToNextLevel;
         this.formatedPercentToNextLevel = this.percentToNextLevel + '%';
 
+        this.store.dispatch(ChallengeActions.setCurrentExperience({ currentExperience: user.currentExperience }))
+        this.store.dispatch(ChallengeActions.setExperienceToNextLevel({ experienceToNextLevel: user.experienceToNextLevel }))
+
       });
 
 
     this.store.select('challenge').subscribe(data => {
+      // console.log('foste');
+
       this.experienceToNextLevel = data.challenge.experienceToNextLevel;
       this.currentExperience = data.challenge.currentExperience;
       this.percentToNextLevel = Math.round((this.currentExperience * 100)) / this.experienceToNextLevel;
