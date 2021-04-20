@@ -5,5 +5,5 @@
 
     <span class="currentExperience" [ngStyle]="{'left' : formatedPercentToNextLevel}">{{ currentExperience }} xp</span>
   </div>
-  <span>{{ experienceToNextLevel }} xp</span>
+  <span (click)="handleLogout()">{{ experienceToNextLevel }} xp</span>
 </header>

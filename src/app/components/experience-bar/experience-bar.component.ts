@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs/operators';
 import * as fromAppRoot from '../../store/app.reducer';
@@ -20,7 +21,8 @@ export class ExperienceBarComponent implements OnInit {
 
   constructor(
     private readonly store: Store<fromAppRoot.AppState>,
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -51,7 +53,12 @@ export class ExperienceBarComponent implements OnInit {
       this.currentExperience = data.challenge.currentExperience;
       this.percentToNextLevel = Math.round((this.currentExperience * 100)) / this.experienceToNextLevel;
       this.formatedPercentToNextLevel = this.percentToNextLevel + '%';
-    })
+    });
 
+  }
+
+  handleLogout() {
+    localStorage.clear();
+    this.router.navigate(['/']);
   }
 }
