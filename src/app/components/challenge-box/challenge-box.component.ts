@@ -131,7 +131,7 @@ export class ChallengeBoxComponent implements OnInit {
   }
 
   handleSucceededChallenge() {
-    this.store.dispatch(ChallengeActions.isChallengeSucceeded({ challengeResponse: true, amount: this.challenge.amount }))
+    this.store.dispatch(ChallengeActions.isChallengeSucceeded({ challengeResponse: true, amount: this.challenge.amount }));
     this.challenge = null;
   }
 }

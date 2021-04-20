@@ -55,7 +55,7 @@ export class ProfileComponent implements OnInit {
         console.log('users: ', user);
         this.profileInfo = user;
         this.level = user.level;
-      })
+      });
 
 
 
