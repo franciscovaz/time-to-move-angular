@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { Profile } from 'src/app/store/profile/profile.module';
 import * as fromAppRoot from '../../store/app.reducer';
 import * as ProfileActions from '../../store/profile/profile.actions';
+import * as ChallengeActions from '../../store/challenge/challenge.actions';
 
 
 @Component({
@@ -55,6 +56,12 @@ export class ProfileComponent implements OnInit {
         console.log('users: ', user);
         this.profileInfo = user;
         this.level = user.level;
+
+        this.store.dispatch(ProfileActions.updateProfile({ name: user.name, imgUrl: user.imgUrl }));
+        // Challenge
+        this.store.dispatch(ChallengeActions.setLevel({ level: user.level }));
+
+
       });
 
 
