@@ -67,8 +67,9 @@
       }
 
       & button:last-child {
+        background: var(--text);
         &:hover {
-          background: var(--background);
+          background: var(--red);
         }
       }
 
