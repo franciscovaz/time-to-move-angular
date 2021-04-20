@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { map } from 'rxjs/operators';
 
 import * as fromAppRoot from '../../store/app.reducer';
 import * as ProfileActions from '../../store/profile/profile.actions';
@@ -30,6 +31,33 @@ export class ChangeProfileInfoModalComponent implements OnInit {
       name: 'Francisco Vaz',
       imgUrl: 'https://github.com/franciscovaz.png'
     }
+
+    this.http.get('https://time-to-move-14d11-default-rtdb.firebaseio.com/users.json').pipe(
+      map(respData => {
+        let userInfo;
+        for (const key in respData) {
+          if (respData[key].email === localStorage.getItem('email')) {
+            return respData[key];
+          }
+        }
+        return userInfo;
+      })).subscribe(user => {
+        //console.log('users 2: ', user);
+        this.user.name = user.name;
+        this.user.imgUrl = user.imgUrl;
+
+        /* this.store.dispatch(ChallengeActions.setCurrentExperience({ currentExperience: user.currentExperience }))
+        this.store.dispatch(ChallengeActions.setExperienceToNextLevel({ experienceToNextLevel: user.experienceToNextLevel })) */
+
+      });
+
+
+    this.store.select('profile').subscribe(data => {
+      // console.log('foste');
+
+      this.user.name = data.profile.name;
+      this.user.imgUrl = data.profile.imgUrl;
+    })
   }
 
   handleCloseProfileModal() {
