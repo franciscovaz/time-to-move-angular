@@ -27,10 +27,15 @@ export class ChallengeEffects {
           finalExperience = finalExperience - experienceToNextLevel;
           this.store.dispatch(ChallengeActions.levelUp());
           this.store.dispatch(ChallengeActions.isLevelUpModalOpen({ isLevelUpModalOpen: true }));
+
+          this.http.patch(`https://time-to-move-14d11-default-rtdb.firebaseio.com/users/${localStorage.getItem('user_id')}.json`, { experienceToNextLevel: Math.pow((level + 2) * 4, 2) }).subscribe(resp => {
+            console.log('update resp: ', resp);
+
+          });
         }
         this.store.dispatch(ChallengeActions.setCurrentExperience({ currentExperience: finalExperience }));
 
-        this.http.patch(`https://time-to-move-14d11-default-rtdb.firebaseio.com/users/${localStorage.getItem('user_id')}.json`, { level: level + 1, currentExperience: finalExperience, challengesCompleted: challengesCompleted, experienceToNextLevel: Math.pow((level + 2) * 4, 2) }).subscribe(resp => {
+        this.http.patch(`https://time-to-move-14d11-default-rtdb.firebaseio.com/users/${localStorage.getItem('user_id')}.json`, { level: level + 1, currentExperience: finalExperience, challengesCompleted: challengesCompleted }).subscribe(resp => {
           console.log('update resp: ', resp);
 
         });
