@@ -4,6 +4,7 @@
   font-family: Rajdhani;
   font-weight: 600;
   color: var(--title);
+  cursor: pointer;
 
   & > div {
     flex: 1;
@@ -81,6 +82,7 @@
 
 @media screen and (max-width: 924px) {
   .countdownContainer {
+    cursor: pointer;
     & > div {
       font-size: 6.5rem;
     }
