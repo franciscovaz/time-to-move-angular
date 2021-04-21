@@ -109,3 +109,15 @@
     }
   }
 }
+
+@media screen and (max-width: 765px) {
+  .challengeActive {
+    main {
+      margin-top: 24px;
+    }
+
+    footer {
+      margin: 24px 0;
+    }
+  }
+}
