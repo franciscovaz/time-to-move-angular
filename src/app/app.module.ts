@@ -29,6 +29,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 
 import { faPowerOff, faSignOutAlt, fas } from '@fortawesome/free-solid-svg-icons';
+import { RankingComponent } from './components/ranking/ranking.component';
 
 
 
@@ -45,7 +46,8 @@ import { faPowerOff, faSignOutAlt, fas } from '@fortawesome/free-solid-svg-icons
     LevelUpModalComponent,
     LoginComponent,
     AfterLoginToFixComponent,
-    HeaderComponent
+    HeaderComponent,
+    RankingComponent
   ],
   imports: [
     BrowserModule,

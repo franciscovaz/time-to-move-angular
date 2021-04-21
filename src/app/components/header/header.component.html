@@ -1,9 +1,8 @@
 <header>
   <div class="headerContent">
-    <!-- <img src={imgLogo} alt="Registo de ocorrencias" /> -->
-    <!-- <span>Time to Move</span> -->
     <div class="menuItems">
-      <a href="">{{ menuToshow }}</a>
+      <a [routerLink]="['/time']">Countdown</a>
+      <a [routerLink]="['/ranking']">Ranking</a>
     </div>
 
     <img src="assets/icons/logout.png" alt="Logout" class="logout" (click)="handleLogout()">
