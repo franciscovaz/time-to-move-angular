@@ -19,10 +19,13 @@
 
 @media screen and (max-width: 765px) {
   .container {
+    height: 100%;
     section {
       flex: 1;
       display: grid;
       grid-template-columns: 1fr;
+
+      margin-top: 52px;
 
       gap: 4.25rem; /* 6.25 * 16 100px para cada coluna no mobile */
     }
