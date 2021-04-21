@@ -30,6 +30,7 @@ import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontaweso
 
 import { faPowerOff, faSignOutAlt, fas } from '@fortawesome/free-solid-svg-icons';
 import { RankingComponent } from './components/ranking/ranking.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -57,7 +58,8 @@ import { RankingComponent } from './components/ranking/ranking.component';
     StoreDevtoolsModule.instrument({ logOnly: environment.production }),
     FormsModule,
     HttpClientModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
