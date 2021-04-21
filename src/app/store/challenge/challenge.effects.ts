@@ -13,34 +13,41 @@ export class ChallengeEffects {
   completeChallenge = createEffect(() =>
     this.actions$.pipe(
       ofType(ChallengeActions.isChallengeSucceeded),
-      withLatestFrom(this.store.select('challenge')),
-      tap(([action, store]) => {
-        this.store.dispatch(CountdownActions.countdownHasFinished({ hasFinished: false }))
+      withLatestFrom(this.store.select('challenge'), this.store.select('countdown')),
+      tap(([action, challengeStore, countdownStore]) => {
+        this.store.dispatch(CountdownActions.countdownHasFinished({ hasFinished: false }));
+        if (action.challengeResponse === true && action.amount !== 0) {
 
-        // se action.isChallengSuccess dispara uma action para atualizar a store...
-        const { amount } = action;
-        const { experienceToNextLevel, currentExperience, level, challengesCompleted } = store.challenge;
+          // se action.isChallengSuccess dispara uma action para atualizar a store...
+          const { amount } = action;
+          const { experienceToNextLevel, currentExperience, level, challengesCompleted } = challengeStore.challenge;
+          const { countdownTime, sumCountdownTime } = countdownStore.countdown;
 
-        let finalExperience = currentExperience + amount;
+          let finalExperience = currentExperience + amount;
+          let totalCountdownTime = countdownTime + sumCountdownTime;
 
-        if (finalExperience >= experienceToNextLevel) {
-          finalExperience = finalExperience - experienceToNextLevel;
-          this.store.dispatch(ChallengeActions.levelUp());
-          this.store.dispatch(ChallengeActions.isLevelUpModalOpen({ isLevelUpModalOpen: true }));
+          if (finalExperience >= experienceToNextLevel) {
 
-          this.http.patch(`https://time-to-move-14d11-default-rtdb.firebaseio.com/users/${localStorage.getItem('user_id')}.json`, { experienceToNextLevel: Math.pow((level + 2) * 4, 2) }).subscribe(resp => {
+            finalExperience = finalExperience - experienceToNextLevel;
+            this.store.dispatch(ChallengeActions.levelUp());
+            this.store.dispatch(ChallengeActions.isLevelUpModalOpen({ isLevelUpModalOpen: true }));
+
+
+            this.http.patch(`https://time-to-move-14d11-default-rtdb.firebaseio.com/users/${localStorage.getItem('user_id')}.json`, { level: level + 1, experienceToNextLevel: Math.pow((level + 2) * 4, 2) }).subscribe(resp => {
+              console.log('update resp: ', resp);
+
+            });
+          }
+          this.store.dispatch(CountdownActions.updateSumCountdownTime({ actualCountdownTime: totalCountdownTime }));
+          this.store.dispatch(ChallengeActions.setCurrentExperience({ currentExperience: finalExperience }));
+
+          this.http.patch(`https://time-to-move-14d11-default-rtdb.firebaseio.com/users/${localStorage.getItem('user_id')}.json`, { currentExperience: finalExperience, challengesCompleted: challengesCompleted, sumCountdownTime: totalCountdownTime }).subscribe(resp => {
             console.log('update resp: ', resp);
-
           });
+
+          return challengeStore;
         }
-        this.store.dispatch(ChallengeActions.setCurrentExperience({ currentExperience: finalExperience }));
 
-        this.http.patch(`https://time-to-move-14d11-default-rtdb.firebaseio.com/users/${localStorage.getItem('user_id')}.json`, { level: level + 1, currentExperience: finalExperience, challengesCompleted: challengesCompleted }).subscribe(resp => {
-          console.log('update resp: ', resp);
-
-        });
-
-        return store;
       })
     ), { dispatch: false });
 

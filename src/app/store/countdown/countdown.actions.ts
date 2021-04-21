@@ -14,6 +14,12 @@ export const updateCountdownTime = createAction(
     countdownTime: number
   }>()
 );
+export const updateSumCountdownTime = createAction(
+  '[Countdown] Update sum countdown time',
+  props<{
+    actualCountdownTime: number
+  }>()
+);
 
 export const resetCountdown = createAction(
   '[Countdown] Update countdown time',

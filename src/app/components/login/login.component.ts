@@ -18,6 +18,7 @@ interface User {
   currentExperience: number;
   level: number;
   experienceToNextLevel: number;
+  sumCountdownTime: number;
 }
 @Component({
   selector: 'app-login',
@@ -43,12 +44,14 @@ export class LoginComponent implements OnInit {
       challengesCompleted: 0,
       currentExperience: 0,
       level: 0,
-      experienceToNextLevel: 0
+      experienceToNextLevel: 0,
+      sumCountdownTime: 0,
     }
 
     this.fetchUsers();
 
     if (localStorage.getItem('email')) {
+
       this.router.navigate(['/time']);
     }
   }
@@ -72,6 +75,8 @@ export class LoginComponent implements OnInit {
 
           this.store.dispatch(ChallengeActions.setCompletedChallenges({ completedChallenges: this.usersFromApi[i].challengesCompleted }));
           this.store.dispatch(ChallengeActions.setExperienceToNextLevel({ experienceToNextLevel: this.usersFromApi[i].experienceToNextLevel }));
+
+          this.store.dispatch(CountdownActions.updateSumCountdownTime({ actualCountdownTime: this.usersFromApi[i].sumCountdownTime }));
         }
       }
 
@@ -86,10 +91,11 @@ export class LoginComponent implements OnInit {
         // Profile
         this.store.dispatch(ProfileActions.updateProfile({ name: 'John Doe', imgUrl: 'http://achieveplusdrivingschool.com.au/wp-content/themes/customizeTheme/img/reviewlogo.png' }));
         // Challenge
-        this.store.dispatch(ChallengeActions.setLevel({ level: 1 }))
-        this.store.dispatch(ChallengeActions.setCurrentExperience({ currentExperience: 0 }))
-        this.store.dispatch(ChallengeActions.setCompletedChallenges({ completedChallenges: 0 }))
-        this.store.dispatch(ChallengeActions.setExperienceToNextLevel({ experienceToNextLevel: 64 }))
+        this.store.dispatch(ChallengeActions.setLevel({ level: 1 }));
+        this.store.dispatch(ChallengeActions.setCurrentExperience({ currentExperience: 0 }));
+        this.store.dispatch(ChallengeActions.setCompletedChallenges({ completedChallenges: 0 }));
+        this.store.dispatch(ChallengeActions.setExperienceToNextLevel({ experienceToNextLevel: 64 }));
+        this.store.dispatch(CountdownActions.updateSumCountdownTime({ actualCountdownTime: 0 }));
 
         this.router.navigate(['/time']);
       })

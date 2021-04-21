@@ -10,6 +10,7 @@ export interface State {
 const initialState: State = {
   countdown: {
     countdownTime: 0,
+    sumCountdownTime: 0,
     isModalOpen: false,
     hasFinished: false,
     isActive: false
@@ -38,6 +39,17 @@ const _countdownReducer = createReducer(
       countdown: {
         ...state.countdown,
         countdownTime: action.countdownTime
+      }
+    })
+  ),
+
+  on(
+    CountdownActions.updateSumCountdownTime,
+    (state, action) => ({
+      ...state,
+      countdown: {
+        ...state.countdown,
+        sumCountdownTime: action.actualCountdownTime
       }
     })
   ),
