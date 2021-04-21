@@ -35,6 +35,7 @@ export class AfterLoginToFixComponent implements OnInit {
 
 
   ngOnInit(): void {
+    localStorage.setItem('menuToShow', 'Ranking');
 
     // TODO mudar esta approach
     this.http.get('https://time-to-move-14d11-default-rtdb.firebaseio.com/users.json').pipe(

@@ -24,6 +24,13 @@ import { AfterLoginToFixComponent } from './components/after-login-to-fix/after-
 
 import { HttpClientModule } from '@angular/common/http';
 import { ProfileEffects } from './store/profile/profile.effects';
+import { HeaderComponent } from './components/header/header.component';
+
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
+
+import { faPowerOff, faSignOutAlt, fas } from '@fortawesome/free-solid-svg-icons';
+
+
 
 @NgModule({
   declarations: [
@@ -37,7 +44,8 @@ import { ProfileEffects } from './store/profile/profile.effects';
     ChangeCountdownTimeModalComponent,
     LevelUpModalComponent,
     LoginComponent,
-    AfterLoginToFixComponent
+    AfterLoginToFixComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -46,9 +54,15 @@ import { ProfileEffects } from './store/profile/profile.effects';
     EffectsModule.forRoot([ChallengeEffects, ProfileEffects]),
     StoreDevtoolsModule.instrument({ logOnly: environment.production }),
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(library: FaIconLibrary) {
+    library.addIconPacks(fas);
+    library.addIcons(faPowerOff, faSignOutAlt);
+  }
+}

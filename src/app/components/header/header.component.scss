@@ -1,0 +1,37 @@
+header {
+  padding: 32px 0;
+  background: var(--text);
+}
+
+.headerContent {
+  max-width: 920px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  align-content: space-between;
+
+  img {
+    margin-right: 8px;
+    cursor: pointer;
+  }
+}
+
+.menuItems {
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  a {
+    text-decoration: none;
+    color: #fff;
+    &:hover {
+      opacity: 0.8;
+      color: #ff9000;
+    }
+    & + a {
+      margin-left: 40px;
+    }
+    &.underline {
+      border-bottom: 2px solid #ff9000;
+    }
+  }
+}
