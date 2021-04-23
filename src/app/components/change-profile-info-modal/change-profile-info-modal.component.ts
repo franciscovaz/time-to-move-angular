@@ -61,8 +61,7 @@ export class ChangeProfileInfoModalComponent implements OnInit {
     this.store.dispatch(ProfileActions.updateProfile({ name: this.user.name, imgUrl: this.user.imgUrl }));
 
     this.http.patch(`https://time-to-move-14d11-default-rtdb.firebaseio.com/users/${localStorage.getItem('user_id')}.json`, { name: this.user.name, imgUrl: this.user.imgUrl }).subscribe(resp => {
-      console.log('update resp: ', resp);
-
+      // console.log('update resp: ', resp);
     });
   }
 

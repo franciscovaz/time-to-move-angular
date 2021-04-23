@@ -34,7 +34,7 @@ export class ChallengeEffects {
 
 
             this.http.patch(`https://time-to-move-14d11-default-rtdb.firebaseio.com/users/${localStorage.getItem('user_id')}.json`, { level: level + 1, experienceToNextLevel: Math.pow((level + 2) * 4, 2) }).subscribe(resp => {
-              console.log('update resp: ', resp);
+              // console.log('update resp: ', resp);
 
             });
           }
@@ -42,7 +42,7 @@ export class ChallengeEffects {
           this.store.dispatch(ChallengeActions.setCurrentExperience({ currentExperience: finalExperience }));
 
           this.http.patch(`https://time-to-move-14d11-default-rtdb.firebaseio.com/users/${localStorage.getItem('user_id')}.json`, { currentExperience: finalExperience, challengesCompleted: challengesCompleted, sumCountdownTime: totalCountdownTime }).subscribe(resp => {
-            console.log('update resp: ', resp);
+            // console.log('update resp: ', resp);
           });
 
           return challengeStore;
@@ -60,7 +60,7 @@ export class ChallengeEffects {
         const { currentExperience } = action;
 
         this.http.patch(`https://time-to-move-14d11-default-rtdb.firebaseio.com/users/${localStorage.getItem('user_id')}.json`, { currentExperience }).subscribe(resp => {
-          console.log('update resp: ', resp);
+          // console.log('update resp: ', resp);
         });
 
         return store;

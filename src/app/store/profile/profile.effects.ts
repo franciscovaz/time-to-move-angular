@@ -20,7 +20,7 @@ export class ProfileEffects {
         const { imgUrl, name } = action;
 
         this.http.patch(`https://time-to-move-14d11-default-rtdb.firebaseio.com/users/${localStorage.getItem('user_id')}.json`, { imgUrl: imgUrl, name: name }).subscribe(resp => {
-          console.log('update resp: ', resp);
+          // console.log('update resp: ', resp);
         });
 
         return store;
