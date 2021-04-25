@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
 
   handleSubmit(): void {
     localStorage.setItem('email', this.user.email);
-    //TODO setar id mingo na store para osterior update!!!
+    //TODO setar id mongo na store para posterior update!!!
 
     // TODO mudar esta approach
     if (this.usersFromApi.filter(user => user.email === this.user.email).length > 0) {
@@ -84,6 +84,10 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/time']);
     } else {
       console.log('user nao existe!');
+
+      console.log('email: ', this.user.email);
+
+
 
       // user nao existe, vamos criar
       this.http.post('https://time-to-move-14d11-default-rtdb.firebaseio.com/users.json', { ...this.user, email: this.user.email, name: 'John Doe' }).subscribe((resp: { name: string }) => {
