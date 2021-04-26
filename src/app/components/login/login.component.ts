@@ -58,7 +58,6 @@ export class LoginComponent implements OnInit {
 
   handleSubmit(): void {
     localStorage.setItem('email', this.user.email);
-    //TODO setar id mongo na store para posterior update!!!
 
     // TODO mudar esta approach
     if (this.usersFromApi.filter(user => user.email === this.user.email).length > 0) {
