@@ -79,6 +79,7 @@ const _challengeReducer = createReducer(
       ...state,
       challenge: {
         ...state.challenge,
+        level: 1,
         challengesCompleted: action.completedChallenges
       }
     })

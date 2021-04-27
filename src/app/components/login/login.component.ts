@@ -84,12 +84,8 @@ export class LoginComponent implements OnInit {
     } else {
       console.log('user nao existe!');
 
-      console.log('email: ', this.user.email);
-
-
-
       // user nao existe, vamos criar
-      this.http.post('https://time-to-move-14d11-default-rtdb.firebaseio.com/users.json', { ...this.user, email: this.user.email, name: 'John Doe' }).subscribe((resp: { name: string }) => {
+      this.http.post('https://time-to-move-14d11-default-rtdb.firebaseio.com/users.json', { ...this.user, email: this.user.email, name: 'John Doe', experienceToNextLevel: 64 }).subscribe((resp: { name: string }) => {
         localStorage.setItem('user_id', resp.name);
         // Profile
         this.store.dispatch(ProfileActions.updateProfile({ name: 'John Doe', imgUrl: 'http://achieveplusdrivingschool.com.au/wp-content/themes/customizeTheme/img/reviewlogo.png' }));
