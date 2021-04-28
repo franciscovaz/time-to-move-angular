@@ -102,13 +102,13 @@ export class ChallengeBoxComponent implements OnInit {
 
           this.store.dispatch(ChallengeActions.storeActiveChallenge({ activeChallenge: this.challenge }))
 
+          new Audio('/assets/notification.mp3').play();
+
           if (!("Notification" in window)) {
             console.log('Notification does not work on mobile!');
             return;
           }
           else if (Notification.permission === "granted") {
-
-            new Audio('/assets/notification.mp3').play();
 
             new Notification('New challenge 🎉', {
               body: `Worth ${this.challenge.amount}xp!`
