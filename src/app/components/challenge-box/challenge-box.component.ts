@@ -91,6 +91,9 @@ export class ChallengeBoxComponent implements OnInit {
 
   ngOnInit(): void {
 
+    const soundEffect = new Audio();
+    soundEffect.play();
+
     this.store.select('countdown').subscribe(data => {
       this.hasFinished = data.countdown.hasFinished;
       this.isActive = data.countdown.isActive;
@@ -102,7 +105,9 @@ export class ChallengeBoxComponent implements OnInit {
 
           this.store.dispatch(ChallengeActions.storeActiveChallenge({ activeChallenge: this.challenge }))
 
-          new Audio('/assets/notification.mp3').play();
+          soundEffect.src = '/assets/notification.mp3';
+          soundEffect.play();
+          // new Audio('/assets/notification.mp3').play();
 
           if (!("Notification" in window)) {
             console.log('Notification does not work on mobile!');
