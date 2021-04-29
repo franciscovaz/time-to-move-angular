@@ -1,7 +1,13 @@
 <div class="profileContainer">
-  <img [src]="profileInfo.imgUrl" alt="Francisco Vaz" (click)="handleChangeUser()">
-  <div>
-    <strong>{{ profileInfo.name }}</strong>
+  <img [src]="profileInfo.imgUrl" alt="Francisco Vaz">
+  <div class="nameLevelContainer">
+    <div class="nameEdit">
+      <strong>{{ profileInfo.name }}</strong>
+      <img src="assets/icons/user.png" alt="Logout" class="logout" (click)="handleChangeUser()">
+
+    </div>
+
+
     <p>
       <img src="assets/icons/level.svg" alt="Level">
       Level {{ level }}

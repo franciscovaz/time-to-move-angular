@@ -8,10 +8,15 @@
     width: 5.5rem;
     height: 5.5rem;
     border-radius: 50%;
-    cursor: pointer;
   }
 
-  div {
+  .nameContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nameLevelContainer {
     margin-left: 1.5rem;
 
     strong {
@@ -23,10 +28,21 @@
     p {
       font-size: 1rem;
       margin-top: 0.5rem;
+      cursor: pointer;
 
       img {
         margin-right: 0.5rem;
       }
+    }
+  }
+
+  .nameEdit {
+    display: flex;
+    align-items: center;
+
+    img {
+      margin-left: 1.5rem;
+      cursor: pointer;
     }
   }
 }
