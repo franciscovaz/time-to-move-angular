@@ -65,6 +65,7 @@ export class LoginComponent implements OnInit {
       console.log('user existe!');
       for (var i = 0; i < this.usersFromApi.length; i++) {
         if (this.usersFromApi[i].email === this.user.email) {
+
           localStorage.setItem('user_id', this.usersFromApi[i].id);
           // Profile
           this.store.dispatch(ProfileActions.updateProfile({ name: this.usersFromApi[i].name, imgUrl: this.usersFromApi[i].imgUrl }));

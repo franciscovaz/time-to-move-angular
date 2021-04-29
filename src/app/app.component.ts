@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-
-import * as fromAppRoot from './store/app.reducer';
 
 
 @Component({
@@ -10,12 +7,9 @@ import * as fromAppRoot from './store/app.reducer';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'time-to-move-v2';
+  title = 'Time to Move';
 
-  constructor(
-    private store: Store<fromAppRoot.AppState>
-  ) {
-  }
+  constructor() { }
 
   ngOnInit(): void {
 

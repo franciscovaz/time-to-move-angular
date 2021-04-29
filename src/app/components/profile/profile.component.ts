@@ -55,12 +55,11 @@ export class ProfileComponent implements OnInit {
         this.profileInfo = user;
         this.level = user.level;
 
+
         this.store.dispatch(ProfileActions.updateProfile({ name: user.name, imgUrl: user.imgUrl }));
         // Challenge
         this.store.dispatch(ChallengeActions.setLevel({ level: user.level }));
       });
-
-
 
 
     this.store.select('profile').subscribe(state => {
@@ -70,6 +69,7 @@ export class ProfileComponent implements OnInit {
     });
 
     this.store.select('challenge').subscribe(state => {
+
       this.level = state.challenge.level;
     });
 
