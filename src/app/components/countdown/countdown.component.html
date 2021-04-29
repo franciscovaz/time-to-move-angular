@@ -1,5 +1,5 @@
-<button mat-raised-button class="editButton" matTooltip="To edit the countdown time, click on it!"
-  matTooltipPosition="right">
+<button mat-raised-button class="editButton" #tooltip="matTooltip" matTooltip="To edit the countdown time, click on it!"
+  matTooltipPosition="right" (click)="tooltip.toggle()">
   <img src="assets/icons/info.png" alt="Information">
 
 </button>
