@@ -1,9 +1,9 @@
-<div class="tableContainer">
+<div class="tableContainer" *ngIf="!isMobile">
   <table mat-table [dataSource]="dataSource">
 
     <!-- id Column -->
     <ng-container matColumnDef="ranking">
-      <th mat-header-cell *matHeaderCellDef> Ranking </th>
+      <th mat-header-cell *matHeaderCellDef> Rank </th>
       <td mat-cell *matCellDef="let element"> {{element.ranking}} </td>
     </ng-container>
 
@@ -33,6 +33,35 @@
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>
+
+<div class="tableContainer" *ngIf="isMobile">
+  <table mat-table [dataSource]="dataSource">
+
+    <!-- id Column -->
+    <ng-container matColumnDef="ranking">
+      <th mat-header-cell *matHeaderCellDef> Rank </th>
+      <td mat-cell *matCellDef="let element"> {{element.ranking}} </td>
+    </ng-container>
+
+    <!-- Email Column -->
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef> Email </th>
+      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+    </ng-container>
+
+    <!-- sumCountdownTime Column -->
+    <ng-container matColumnDef="sumCountdownTime">
+      <th mat-header-cell *matHeaderCellDef> Total Duration </th>
+      <td mat-cell *matCellDef="let element"> {{element.sumCountdownTime}} </td>
+    </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumnsMobile"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumnsMobile;"></tr>
   </table>
 
   <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>

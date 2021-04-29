@@ -3,10 +3,9 @@ import { AfterViewInit, ChangeDetectorRef, Component, OnChanges, OnInit, ViewChi
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Store } from '@ngrx/store';
 import { map } from 'rxjs/operators';
-
-import * as fromAppRoot from '../../store/app.reducer';
+import { MediaObserver } from '@angular/flex-layout'
+import { Observable } from 'rxjs';
 
 interface User {
   id: string,
@@ -28,16 +27,20 @@ interface User {
 })
 export class RankingComponent implements OnInit, OnChanges {
   users: User[];
+  isMobile: boolean;
 
   dataSource = new MatTableDataSource<User>();
   displayedColumns: string[] = ['ranking', 'email', 'level', 'sumCountdownTime', 'challengesCompleted'];
+  displayedColumnsMobile: string[] = ['ranking', 'email', 'sumCountdownTime'];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(
     private http: HttpClient,
-    private changeDetectorRef: ChangeDetectorRef) { }
+    private changeDetectorRef: ChangeDetectorRef,
+    private mediaObserver: MediaObserver
+  ) { }
 
   ngOnInit(): void {
     this.http.get('https://time-to-move-14d11-default-rtdb.firebaseio.com/users.json').pipe(
@@ -66,6 +69,11 @@ export class RankingComponent implements OnInit, OnChanges {
         this.dataSource.data = this.users;
         this.changeDetectorRef.detectChanges();
       });
+
+    console.log('mobile: ', this.mediaObserver.isActive('xs'));
+
+
+    this.isMobile = this.mediaObserver.isActive('xs');
 
 
   }

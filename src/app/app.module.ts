@@ -35,6 +35,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 @NgModule({
@@ -65,7 +66,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     BrowserAnimationsModule,
     MatTableModule,
     MatPaginatorModule,
-    MatTooltipModule
+    MatTooltipModule,
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]
