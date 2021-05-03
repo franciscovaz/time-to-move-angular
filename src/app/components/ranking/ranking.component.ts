@@ -30,8 +30,8 @@ export class RankingComponent implements OnInit, OnChanges {
   isMobile: boolean;
 
   dataSource = new MatTableDataSource<User>();
-  displayedColumns: string[] = ['ranking', 'email', 'level', 'sumCountdownTime', 'challengesCompleted'];
-  displayedColumnsMobile: string[] = ['ranking', 'email', 'sumCountdownTime'];
+  displayedColumns: string[] = ['ranking', 'name', 'level', 'sumCountdownTime', 'challengesCompleted'];
+  displayedColumnsMobile: string[] = ['ranking', 'name', 'sumCountdownTime'];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -70,7 +70,7 @@ export class RankingComponent implements OnInit, OnChanges {
         this.changeDetectorRef.detectChanges();
       });
 
-    console.log('mobile: ', this.mediaObserver.isActive('xs'));
+    // console.log('mobile: ', this.mediaObserver.isActive('xs'));
 
 
     this.isMobile = this.mediaObserver.isActive('xs');
