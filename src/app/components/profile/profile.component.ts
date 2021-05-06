@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Profile } from 'src/app/store/profile/profile.module';
 import * as fromAppRoot from '../../store/app.reducer';
@@ -54,7 +53,6 @@ export class ProfileComponent implements OnInit {
       })).subscribe(user => {
         this.profileInfo = user;
         this.level = user.level;
-
 
         this.store.dispatch(ProfileActions.updateProfile({ name: user.name, imgUrl: user.imgUrl }));
         // Challenge

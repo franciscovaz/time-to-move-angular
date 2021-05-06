@@ -1,7 +1,6 @@
 <app-header></app-header>
 <div class="tableContainer" *ngIf="!isMobile">
   <table mat-table [dataSource]="dataSource">
-
     <!-- id Column -->
     <ng-container matColumnDef="ranking">
       <th mat-header-cell *matHeaderCellDef> Rank </th>
@@ -41,7 +40,6 @@
 
 <div class="tableContainer" *ngIf="isMobile">
   <table mat-table [dataSource]="dataSource">
-
     <!-- Rank Column -->
     <ng-container matColumnDef="ranking">
       <th mat-header-cell *matHeaderCellDef> Rank </th>

@@ -1,11 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { AfterViewInit, ChangeDetectorRef, Component, OnChanges, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnChanges, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { map } from 'rxjs/operators';
-import { MediaObserver } from '@angular/flex-layout'
-import { Observable } from 'rxjs';
+import { MediaObserver } from '@angular/flex-layout';
 
 interface User {
   id: string,
@@ -70,12 +69,7 @@ export class RankingComponent implements OnInit, OnChanges {
         this.changeDetectorRef.detectChanges();
       });
 
-    // console.log('mobile: ', this.mediaObserver.isActive('xs'));
-
-
     this.isMobile = this.mediaObserver.isActive('xs');
-
-
   }
 
   ngOnChanges() {

@@ -59,7 +59,6 @@ export class LoginComponent implements OnInit {
   handleSubmit(): void {
     localStorage.setItem('email', this.user.email);
 
-    // TODO mudar esta approach
     if (this.usersFromApi.filter(user => user.email === this.user.email).length > 0) {
       // ja existe este email, vamos redirecionar e atualizar a store com a info do user
       console.log('user existe!');
@@ -79,7 +78,6 @@ export class LoginComponent implements OnInit {
           this.store.dispatch(CountdownActions.updateSumCountdownTime({ actualCountdownTime: this.usersFromApi[i].sumCountdownTime }));
         }
       }
-
 
       this.router.navigate(['/time']);
     } else {
