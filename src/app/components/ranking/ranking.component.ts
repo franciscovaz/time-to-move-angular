@@ -77,6 +77,19 @@ export class RankingComponent implements OnInit, OnChanges {
     this.changeDetectorRef.detectChanges();
   }
 
+
+  convertSecondsToMinAndHours(time: number): string {
+    time = Number(time);
+    let hour = Math.floor(time / 3600);
+    let minute = Math.floor(time % 3600 / 60);
+    let second = Math.floor(time % 3600 % 60);
+
+    let hDisplay = hour > 0 ? hour + (hour == 1 ? " hour, " : " hours, ") : "";
+    let mDisplay = minute > 0 ? minute + (minute == 1 ? " minute, " : " minutes, ") : "";
+    let sDisplay = second > 0 ? second + (second == 1 ? " second" : " seconds") : "";
+    return hDisplay + mDisplay + sDisplay;
+  }
+
 }
 
 
