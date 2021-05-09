@@ -15,7 +15,7 @@ interface User {
   currentExperience?: number,
   level?: number,
   experienceToNextLevel?: number,
-  sumCountdownTime?: number,
+  sumCountdownTime?: string,
   ranking?: number;
 }
 
@@ -58,6 +58,11 @@ export class RankingComponent implements OnInit, OnChanges {
         let i = 1;
         // add ranking number
         for (const element of this.users) {
+          console.log('element: ', element);
+          element.sumCountdownTime = this.convertSecondsToMinAndHours(element.sumCountdownTime);
+          if (element.sumCountdownTime === "") {
+            element.sumCountdownTime = "0";
+          }
           element.ranking = i;
           i++;
         }
@@ -67,6 +72,7 @@ export class RankingComponent implements OnInit, OnChanges {
 
         this.dataSource.data = this.users;
         this.changeDetectorRef.detectChanges();
+
       });
 
     this.isMobile = this.mediaObserver.isActive('xs');
@@ -78,15 +84,14 @@ export class RankingComponent implements OnInit, OnChanges {
   }
 
 
-  convertSecondsToMinAndHours(time: number): string {
-    time = Number(time);
-    let hour = Math.floor(time / 3600);
-    let minute = Math.floor(time % 3600 / 60);
-    let second = Math.floor(time % 3600 % 60);
+  convertSecondsToMinAndHours(time: string): string {
+    let hour = Math.floor(Number(time) / 3600);
+    let minute = Math.floor(Number(time) % 3600 / 60);
+    let second = Math.floor(Number(time) % 3600 % 60);
 
-    let hDisplay = hour > 0 ? hour + (hour == 1 ? " hour, " : " hours, ") : "";
-    let mDisplay = minute > 0 ? minute + (minute == 1 ? " minute, " : " minutes, ") : "";
-    let sDisplay = second > 0 ? second + (second == 1 ? " second" : " seconds") : "";
+    let hDisplay = hour > 0 ? hour + (hour == 1 ? "h:" : "h") : "";
+    let mDisplay = minute > 0 ? minute + (minute == 1 ? "m:" : "m") : "";
+    let sDisplay = second > 0 ? second + (second == 1 ? "s" : "s") : "";
     return hDisplay + mDisplay + sDisplay;
   }
 
