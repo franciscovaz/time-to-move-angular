@@ -58,7 +58,6 @@ export class RankingComponent implements OnInit, OnChanges {
         let i = 1;
         // add ranking number
         for (const element of this.users) {
-          console.log('element: ', element);
           element.sumCountdownTime = this.convertSecondsToMinAndHours(element.sumCountdownTime);
           if (element.sumCountdownTime === "") {
             element.sumCountdownTime = "0";
