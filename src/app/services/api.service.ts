@@ -11,7 +11,7 @@ export class ApiService {
     private readonly http: HttpClient
   ) { }
 
-  getUsers() {
+  addUsers() {
     return this.http.get('https://time-to-move-14d11-default-rtdb.firebaseio.com/users.json').pipe(
       map(respData => {
         const usersArray = [];
