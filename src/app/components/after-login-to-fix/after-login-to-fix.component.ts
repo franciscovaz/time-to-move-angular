@@ -40,7 +40,7 @@ export class AfterLoginToFixComponent implements OnInit {
     localStorage.setItem('menuToShow', 'Ranking');
 
     // TODO mudar esta approach
-    this.apiService.addUsers().subscribe(users => {
+    this.apiService.addUsersToStore().subscribe(users => {
       // ja existe este email, vamos redirecionar e atualizar a store com a info do user
       for (var i = 0; i < users.length; i++) {
 
