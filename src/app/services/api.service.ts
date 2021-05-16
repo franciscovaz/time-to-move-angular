@@ -12,7 +12,7 @@ export class ApiService {
   ) { }
 
   addUsersToStore() {
-    return this.http.get('https://time-to-move-14d11-default-rtdb.firebaseio.com/users.json').pipe(
+    return this.http.get('https://time-tomove-v2-default-rtdb.firebaseio.com/users.json').pipe(
       map(respData => {
         const usersArray = [];
         for (const key in respData) {

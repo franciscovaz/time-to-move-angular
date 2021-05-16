@@ -32,7 +32,7 @@ export class ChangeProfileInfoModalComponent implements OnInit {
       imgUrl: 'https://github.com/franciscovaz.png'
     }
 
-    this.http.get('https://time-to-move-14d11-default-rtdb.firebaseio.com/users.json').pipe(
+    this.http.get('https://time-tomove-v2-default-rtdb.firebaseio.com/users.json').pipe(
       map(respData => {
         let userInfo;
         for (const key in respData) {
@@ -60,7 +60,7 @@ export class ChangeProfileInfoModalComponent implements OnInit {
   handleUpdateUserInfo() {
     this.store.dispatch(ProfileActions.updateProfile({ name: this.user.name, imgUrl: this.user.imgUrl }));
 
-    this.http.patch(`https://time-to-move-14d11-default-rtdb.firebaseio.com/users/${localStorage.getItem('user_id')}.json`, { name: this.user.name, imgUrl: this.user.imgUrl }).subscribe(resp => {
+    this.http.patch(`https://time-tomove-v2-default-rtdb.firebaseio.com/users/${localStorage.getItem('user_id')}.json`, { name: this.user.name, imgUrl: this.user.imgUrl }).subscribe(resp => {
       // console.log('update resp: ', resp);
     });
   }

@@ -27,7 +27,7 @@ export class ExperienceBarComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.http.get('https://time-to-move-14d11-default-rtdb.firebaseio.com/users.json').pipe(
+    this.http.get('https://time-tomove-v2-default-rtdb.firebaseio.com/users.json').pipe(
       map(respData => {
         let userInfo;
         for (const key in respData) {

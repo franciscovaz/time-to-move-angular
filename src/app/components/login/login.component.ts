@@ -84,7 +84,7 @@ export class LoginComponent implements OnInit {
       console.log('user nao existe!');
 
       // user nao existe, vamos criar
-      this.http.post('https://time-to-move-14d11-default-rtdb.firebaseio.com/users.json', { ...this.user, email: this.user.email, name: 'John Doe', experienceToNextLevel: 64 }).subscribe((resp: { name: string }) => {
+      this.http.post('https://time-tomove-v2-default-rtdb.firebaseio.com/users.json', { ...this.user, email: this.user.email, name: 'John Doe', experienceToNextLevel: 64 }).subscribe((resp: { name: string }) => {
         localStorage.setItem('user_id', resp.name);
         // Profile
         this.store.dispatch(ProfileActions.updateProfile({ name: 'John Doe', imgUrl: 'http://achieveplusdrivingschool.com.au/wp-content/themes/customizeTheme/img/reviewlogo.png' }));
@@ -103,7 +103,7 @@ export class LoginComponent implements OnInit {
 
 
   private fetchUsers(): void {
-    this.http.get('https://time-to-move-14d11-default-rtdb.firebaseio.com/users.json').pipe(
+    this.http.get('https://time-tomove-v2-default-rtdb.firebaseio.com/users.json').pipe(
       map(respData => {
         const usersArray = [];
         for (const key in respData) {
