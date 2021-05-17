@@ -20,7 +20,6 @@ export class ProfileEffects {
         const { imgUrl, name } = action;
 
         this.http.patch(`https://time-tomove-v2-default-rtdb.firebaseio.com/users/${localStorage.getItem('user_id')}.json`, { imgUrl: imgUrl, name: name }).subscribe(resp => {
-          // console.log('update resp: ', resp);
         });
 
         return store;
