@@ -29,8 +29,6 @@ export class CompletedChallengesComponent implements OnInit {
       })
     ); */
 
-
-
     this.http.get('https://time-tomove-v2-default-rtdb.firebaseio.com/users.json').pipe(
       map(respData => {
         let userInfo;

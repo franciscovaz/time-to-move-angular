@@ -13,7 +13,6 @@ import * as CountdownActions from '../../store/countdown/countdown.actions';
 })
 export class CountdownComponent implements OnInit {
 
-  // time = 0.1 * 60;
   isActive = false;
   hasFinished = false;
   isChallengeActive: boolean;
@@ -104,17 +103,13 @@ export class CountdownComponent implements OnInit {
       })
     } else if (this.isActive && this.currentTime === 0) {
       this.store.dispatch(CountdownActions.countdownHasFinished({ hasFinished: true }))
-      // this.hasFinished = true;
       this.store.dispatch(CountdownActions.countdownIsActive({ isActive: false }))
-      //this.isActive = false;
-      // TODO começar novo desafio
       this.firstSub.unsubscribe();
 
     }
   }
 
   startCountdown() {
-    // this.isActive = true;
     this.store.dispatch(CountdownActions.countdownIsActive({ isActive: true }))
 
     this.countdown();

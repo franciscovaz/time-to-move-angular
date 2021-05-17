@@ -16,7 +16,6 @@ export class ProfileEffects {
       withLatestFrom(this.store.select('profile')),
       tap(([action, store]) => {
 
-        // se action.isChallengSuccess dispara uma action para atualizar a store...
         const { imgUrl, name } = action;
 
         this.http.patch(`https://time-tomove-v2-default-rtdb.firebaseio.com/users/${localStorage.getItem('user_id')}.json`, { imgUrl: imgUrl, name: name }).subscribe(resp => {
