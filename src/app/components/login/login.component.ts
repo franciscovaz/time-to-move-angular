@@ -60,8 +60,7 @@ export class LoginComponent implements OnInit {
     localStorage.setItem('email', this.user.email);
 
     if (this.usersFromApi.filter(user => user.email === this.user.email).length > 0) {
-      // ja existe este email, vamos redirecionar e atualizar a store com a info do user
-      console.log('user existe!');
+      // user existe!
       for (var i = 0; i < this.usersFromApi.length; i++) {
         if (this.usersFromApi[i].email === this.user.email) {
 
@@ -81,9 +80,8 @@ export class LoginComponent implements OnInit {
 
       this.router.navigate(['/time']);
     } else {
-      console.log('user nao existe!');
+      // user nao existe!
 
-      // user nao existe, vamos criar
       this.http.post('https://time-tomove-v2-default-rtdb.firebaseio.com/users.json', { ...this.user, email: this.user.email, name: 'John Doe', experienceToNextLevel: 64 }).subscribe((resp: { name: string }) => {
         localStorage.setItem('user_id', resp.name);
         // Profile
